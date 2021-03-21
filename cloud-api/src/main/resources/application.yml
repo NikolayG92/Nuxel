@@ -1,0 +1,25 @@
+server:
+  port: 9093
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
+spring:
+  application:
+    name: CLOUD-API
+  cloud:
+    gateway:
+      routes:
+        - id: USER-SERVICE
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/users/**
+        - id: ADS-SERVICE
+          uri: lb://ADS-SERIVCE
+          predicates:
+            - Path=/ads/**
