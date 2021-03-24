@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,11 +23,10 @@ public class Ad extends BaseEntity{
     private Double price;
     @Column(nullable = false)
     private LocalDate date;
-
     private String userId;
     @ManyToOne
     private Category category;
-    @OneToMany
-    private List<Massage> massages;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Message> messages = new ArrayList<>();
 
 }

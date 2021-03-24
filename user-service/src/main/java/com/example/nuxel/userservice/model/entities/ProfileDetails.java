@@ -4,9 +4,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "profile_details")
@@ -25,6 +26,6 @@ public class ProfileDetails extends BaseEntity{
     private LocalDate dateOfBirth;
     @Column(name = "phone_number")
     private String phoneNumber;
-    @Enumerated(EnumType.STRING)
+    @Column(name = "gender")
     private Gender gender;
 }

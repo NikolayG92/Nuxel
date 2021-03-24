@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Massage extends BaseEntity {
+public class Message extends BaseEntity {
 
     private String description;
     @Column(name = "time_sent")
