@@ -1,0 +1,67 @@
+<html lang="en"
+      xmlns:th="https://www.thymeleaf.org">
+<head th:insert="~{fragments/head}">
+
+</head>
+<body>
+<th:block th:insert="~{fragments/nav}">
+
+</th:block>
+<div class="container-fluid">
+    <div class="row align-items-center mt-5" th:if="${statusMessage}">
+        <div class="col-12 alert  text-center" th:classappend="${statusCode =='error'?'alert-danger':'alert-success'}"
+             th:text="${statusMessage}">
+        </div>
+    </div>
+
+    <main>
+        <div class="container-div">
+
+            <div class="login-intro">
+                <div>
+                    <h1>Sign up</h1>
+                    <span>Create account and post your ad or contact to other sellers</span>
+                    <img src="/img/nuxel-logo-orange.jpg"></span>
+                </div>
+            </div>
+            <div class="login-form">
+
+                <form th:object="${userRegisterBindingModel}" th:action="@{/users/register}" th:method="post">
+                    <div>
+                        <label for="username">Username</label>
+                        <input th:field="*{username}" th:errorclass="bg-warning" type="text" id="username" name="username">
+                        <small th:each="e : ${#fields.errors('username')}" th:text="${e}" class="text-error"></small>
+                    </div>
+                    <div>
+                        <label for="password">Password</label>
+                        <input th:field="*{password}" th:errorclass="bg-warning" type="password" id="password" name="password">
+                        <small th:each="e : ${#fields.errors('password')}" th:text="${e}" class="text-error"></small>
+                    </div>
+                    <div>
+                        <label for="confirmPassword">Confirm password</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword">
+
+                    </div>
+                    <div>
+                        <label for="email">Email</label>
+                        <input th:field="*{email}" th:errorclass="bg-warning" type="email" id="email" name="email">
+                        <small th:each="e : ${#fields.errors('email')}" th:text="${e}" class="text-error"></small>
+                    </div>
+                    <div class="btn-container">
+                        <button class="login-btn" type="submit">Sign up</button>
+                        <span>OR</span>
+                        <a th:href="@{/users/login}">Login</a>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </main>
+
+
+</div>
+
+<th:block th:insert="~{fragments/footer}">
+
+</th:block>
+</body></html>
