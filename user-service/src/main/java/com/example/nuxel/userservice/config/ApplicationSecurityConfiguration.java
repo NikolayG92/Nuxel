@@ -1,6 +1,5 @@
 package com.example.nuxel.userservice.config;
 
-import org.springframework.boot.autoconfigure.security.reactive.PathRequest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -21,14 +20,14 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/css/**", "/js/**", "/img/**").permitAll()
-                .antMatchers("/", "/api/users/login", "/api/users/register", "/api/users/{id}").anonymous()
+                .antMatchers("/", "/users/login", "/users/register").anonymous()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/api/users/login")
+                .loginPage("/users/login")
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/api/home")
+                .defaultSuccessUrl("/", true)
                 .and()
                 .logout()
                 .logoutSuccessUrl("/")
