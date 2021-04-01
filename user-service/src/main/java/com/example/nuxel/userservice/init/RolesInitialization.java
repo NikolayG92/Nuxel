@@ -4,9 +4,11 @@ import com.example.nuxel.userservice.model.entities.Role;
 import com.example.nuxel.userservice.repositories.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component
+@Order(value = 1)
 public class RolesInitialization implements CommandLineRunner {
     private RoleRepository roleRepository;
 
