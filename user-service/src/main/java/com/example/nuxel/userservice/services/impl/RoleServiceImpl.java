@@ -1,5 +1,6 @@
 package com.example.nuxel.userservice.services.impl;
 
+import com.example.nuxel.userservice.model.entities.Role;
 import com.example.nuxel.userservice.repositories.RoleRepository;
 import com.example.nuxel.userservice.services.RoleService;
 import com.example.nuxel.userservice.services.serviceModels.RoleServiceModel;
@@ -30,7 +31,8 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public RoleServiceModel findByAuthority(String authority) {
-        return this.modelMapper.map(this.roleRepository.findByAuthority(authority), RoleServiceModel.class);
+    public Role findByAuthority(String authority) {
+        return this.roleRepository
+                .findByAuthority(authority);
     }
 }

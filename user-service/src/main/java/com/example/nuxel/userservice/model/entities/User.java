@@ -29,7 +29,7 @@ public class User extends BaseEntity implements UserDetails {
             ,joinColumns = @JoinColumn(name = "user_id",referencedColumnName = "id")
             ,inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "id"))
     private Set<Role> authorities;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private ProfileDetails profileDetails;
 
     @Transient
