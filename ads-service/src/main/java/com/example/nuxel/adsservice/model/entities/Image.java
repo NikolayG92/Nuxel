@@ -9,16 +9,11 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "addresses")
+@Table(name = "images")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Address extends BaseEntity {
-    private String city;
-    private String region;
-    @Column(name = "post_code")
-    private int postCode;
-    @Column(name ="phone_number")
-    private String phoneNumber;
-
+public class Image extends BaseEntity{
+    @Column
+    private String url;
 }

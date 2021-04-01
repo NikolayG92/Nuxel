@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,18 +16,25 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class Ad extends BaseEntity{
-    @Column(nullable = false)
+    @Column
     private String name;
-    @Column(nullable = false)
+    @Column(columnDefinition = "TEXT")
     private String description;
-    @Column(nullable = false)
-    private Double price;
-    @Column(nullable = false)
+    @Column
+    private BigDecimal price;
+    @Column
     private LocalDate date;
+
     private String userId;
     @ManyToOne
+    private Address address;
+    @ManyToOne
     private Category category;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+
+    @OneToMany
     private List<Message> messages = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Image> images;
 
 }
