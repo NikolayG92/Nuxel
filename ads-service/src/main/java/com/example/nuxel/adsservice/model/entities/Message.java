@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Message extends BaseEntity {
 
+    @Column
     private String description;
     @Column(name = "time_sent")
     private LocalDateTime timeSent;
