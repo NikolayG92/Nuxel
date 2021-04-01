@@ -1,0 +1,148 @@
+.login-form {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.container-div {
+    display: flex;
+    align-items: center;
+    border: 1px solid lightgray;
+    margin: 0 auto;
+    width: 70%;
+    border-radius: 8px;
+    padding: 0px;
+    margin-top: 4px;
+}
+
+.login-intro {
+    background: #D38E00;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    width: 50%;
+}
+
+.login-intro div {
+    display: flex;
+    flex-direction: column;
+    margin-left: 85px;
+    margin-top: 65px;
+    width: 60%;
+}
+
+.login-intro>div>span {
+    font-size: 1.2em;
+    font-family: system-ui;
+    font-weight: 500;
+}
+
+.login-intro h1 {
+    font-family: emoji;
+    font-size: 3em;
+    margin-bottom: 50px;
+}
+
+.login-form {
+    width: 50%;
+    height: 465px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form form {
+    width: 60%;
+}
+
+.login-form div {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form input {
+    border: none;
+    border-bottom: 1px solid;
+}
+
+.login-form label {
+    text-transform: uppercase;
+    font-family: monospace;
+    opacity: 0.7;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+}
+
+.login-btn {
+    color: white;
+    background: #00CB66;
+    border: none;
+    height: 40px;
+    width: 115px;
+    font-size: 1em;
+    font-weight: 700;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.login-btn:hover{
+    background: #D38E00;
+}
+
+.btn-container span {
+    margin-bottom: 5px;
+    opacity: 0.7;
+    font-size: 0.8em;
+}
+
+.btn-container a {
+    font-size: 1em;
+    color: #00CB66;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.btn-container a:hover{
+    text-decoration: none;
+    color: #D38E00;
+}
+
+.login-intro img {
+    top: 150px;
+    width: 140px;
+    position: relative;
+    display: flex;
+    margin: 0 auto;
+}
+
+.login-intro::before{
+    content: '';
+    background: url('../../../assets/img/69769.png');
+    position: absolute;
+    bottom: 0;
+    width: 200px;
+    height: 200px;
+    background-size: cover;
+    opacity: 0.3;
+    left: 220px;
+    top: 210px;
+}
+
+.login-intro::after{
+    content: '';
+    background: url('../../../assets/img/30626-200.png');
+    position: relative;
+    bottom: 290px;
+    left: 260px;
+    width: 200px;
+    height: 200px;
+    background-size: cover;
+    opacity: 0.3;
+}
+
+.input-error {
+    color: red;
+}
