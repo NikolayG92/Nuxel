@@ -1,0 +1,48 @@
+<div class="container-div">
+
+    <div class="login-intro">
+        <div>
+            <h1>Log in</h1>
+            <span>Log in to contact to sellers or to post your ad</span>
+            <img src="../../../assets/img/nuxel-logo-orange.jpg">
+        </div>
+    </div>
+    <div class="login-form">
+
+        <form  #f="ngForm" (ngSubmit)="submitFormHandler(f.value)" >
+
+            <div>
+                <label for="username">Username</label>
+                <input #username="ngModel" [class.input-error]="username.touched && !!username.errors" 
+                type="text" id="username" name="username" ngModel required minlength=4/>
+            </div>
+            <p class="input-error" *ngIf="username.touched && username.errors?.required">
+                Username is required!
+            </p>
+            <p class="input-error" *ngIf="username.touched && username.errors?.minlength">
+                Username should be at least 4 characters
+            </p>
+            <div>
+                <label for="password">Password</label>
+                <input #password="ngModel" [class.input-error]="password.touched && !!password.errors"
+         type="password" id="password" name="password" ngModel required minlength=4/>
+    </div>
+    <p class="input-error" *ngIf="password.touched && password.errors?.required">
+        Password is required!
+    </p>
+    <p class="input-error" *ngIf="password.touched && password.errors?.minlength">
+        Password should be at least 4 characters
+    </p>
+
+    <p *ngIf="errorMessage" class="input-error">
+        {{errorMessage}}
+      </p>
+            <div class="btn-container">
+                <button [disabled]="f.invalid" class="login-btn" type="submit">Login</button>
+                <span>OR</span>
+                <a routerLink="user/register">Sign Up</a>
+            </div>
+        </form>
+    </div>
+
+</div>

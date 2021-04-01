@@ -1,0 +1,67 @@
+<div class="container-div">
+
+    <div class="login-intro">
+        <div>
+            <h1>Sign up</h1>
+            <span>Create account and post your ad or contact to other sellers</span>
+            <img src="../../../assets/img/nuxel-logo-orange.jpg">
+        </div>
+    </div>
+    <div class="login-form">
+
+        <form #f="ngForm" (ngSubmit)="submitFormHandler(f.value)" class="form-group">
+            <div>
+                <label for="username">Username</label>
+                <input #username="ngModel" [class.input-error]="username.touched && !!username.errors" 
+                type="text" id="username" name="username" ngModel required minlength=4/>
+            </div>
+            <p class="input-error" *ngIf="username.touched && username.errors?.required">
+                Username is required!
+            </p>
+            <p class="input-error" *ngIf="username.touched && username.errors?.minlength">
+                Username should be at least 4 characters
+            </p>
+            <div>
+              <label for="password">Password</label>
+              <input #password="ngModel" [class.input-error]="password.touched && !!password.errors"
+          type="password" id="password" name="password" ngModel required minlength=4/>
+     </div>
+     <p class="input-error" *ngIf="password.touched && password.errors?.required">
+         Password is required!
+     </p>
+     <p class="input-error" *ngIf="password.touched && password.errors?.minlength">
+         Password should be at least 4 characters
+     </p>
+      <div class="form-item">
+          <div>
+              <label for="confirmPassword">Confirm Password</label>
+          </div>
+          <input #confirmPassword="ngModel" [class.input-error]="confirmPassword.touched && !!confirmPassword.errors"
+          type="password" id="confirmPassword" name="confirmPassword" ngModel required minlength=4/>
+     </div>
+     <p class="input-error" *ngIf="confirmPassword.touched && confirmPassword.errors?.required">
+         Confirm password is required!
+     </p>
+     <p class="input-error"*ngIf="confirmPassword.touched && confirmPassword.errors?.minlength">
+         Confirm password should be at least 4 characters
+     </p>
+            <div>
+                <label for="email">Email</label>
+                <input #email="ngModel" [class.input-error]="email.touched && !!email.errors"
+                type="email" id="email" name="email" ngModel required email/>
+           </div>
+           <p class="input-error" *ngIf="email.touched && email.errors?.required">
+               Email is required!
+           </p>
+           <p class="input-error" *ngIf="email.touched && email.errors?.email">
+               Email is not valid!
+           </p>
+            <div class="btn-container">
+                <button [disabled]="f.invalid" class="login-btn" type="submit">Sign up</button>
+                <span>OR</span>
+                <a routerLink="user/login">Login</a>
+            </div>
+        </form>
+    </div>
+
+</div>

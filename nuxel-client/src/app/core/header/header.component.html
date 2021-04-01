@@ -1,0 +1,32 @@
+<header>
+    <nav>
+        <ul class="nuxel-navbar">
+            <li class="logo">
+                <a routerLink="/">
+                <img src="https://res.cloudinary.com/nuxel-application/image/upload/v1616743270/categories/NuXeL-logo_t1j7jv.jpg">
+                </a>
+            </li>
+            <li class="search">
+                <input type="search">
+                <i class="fas fa-search"></i>
+            </li>
+            <li>
+                <a routerLink="/about">About Us</a>
+            </li>
+            <li *ngIf="isLoggedIn()">
+                <a routerLink="user/profile">Profile</a>
+            </li>
+            <li *ngIf="isLoggedIn()">
+                <a (click)="logout()">Logout</a>
+            </li>
+   
+            <li *ngIf="!isLoggedIn()">
+                <a routerLink="user/login">Login</a>
+            </li>
+            <li *ngIf="!isLoggedIn()">
+                <a routerLink="/user/register">Register</a>
+            </li>
+        </ul>
+    
+    </nav>
+</header>
