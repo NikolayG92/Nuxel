@@ -4,5 +4,4 @@ export interface UserModel{
     imageUrl: string;
     password: string;
     username: Date;
-    boughtTickets: number;
 }
