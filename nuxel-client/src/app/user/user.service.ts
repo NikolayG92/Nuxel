@@ -39,8 +39,7 @@ export class UserService {
     return this.http.post(`${this.apiUrl}/register`, user)
     .pipe(
       catchError(error => {
-        alert(error);
-        return of(false);
+        return error;
       })
     
       )
