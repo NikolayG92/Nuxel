@@ -56,10 +56,10 @@ public class AdAddValidator implements org.springframework.validation.Validator 
             }
         }
 
-        if (adAddBindingModel.getCategory() == null) {
-            errors.rejectValue("category", CATEGORY_CANNOT_BE_NULL,
-                    CATEGORY_CANNOT_BE_NULL);
-        }
+//        if (adAddBindingModel.getCategory() == null) {
+//            errors.rejectValue("category", CATEGORY_CANNOT_BE_NULL,
+//                    CATEGORY_CANNOT_BE_NULL);
+//        }
 
         if (adAddBindingModel.getCity().isEmpty()) {
             errors.rejectValue("city", CITY_CANNOT_BE_NULL,
@@ -90,11 +90,6 @@ public class AdAddValidator implements org.springframework.validation.Validator 
         if (!adAddBindingModel.getPhoneNumber().matches("0[0-9]{9}")){
             errors.rejectValue("phoneNumber", INVALID_PHONE_NUMBER,
                     INVALID_PHONE_NUMBER);
-        }
-
-        if (!adAddBindingModel.getPhoneNumber().startsWith("088")){
-            errors.rejectValue("phoneNumber", PHONE_NUMBER_START_WITH_088,
-                    PHONE_NUMBER_START_WITH_088);
         }
     }
 }

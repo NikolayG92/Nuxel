@@ -1,0 +1,130 @@
+
+<div class="container mt-5">
+        <h2 class="text-center form-heading">Add Ad</h2>
+        <form [formGroup]="form"  class="form w-50 mx-auto" (ngSubmit)="submitHandler()">
+
+            <div class="form-group">
+                <label for="name" class="font-weight-bold">Ad heading</label>
+                <input [class.text-danger]="form.get('name').touched && !!form.get('name').errors" type="text" class="form-control" id="name"
+                 placeholder="Enter ad heading" formControlName="name">       
+            </div>
+            <p *ngIf="form.get('name').touched && form.get('name').errors?.required" class="input-error">
+                Name is required!
+            </p>
+            <p *ngIf="form.get('name').touched && form.get('name').errors?.minlength" class="input-error">
+                Name must be at least 2 characters!
+            </p>
+            <p *ngIf="form.get('name').touched && form.get('name').errors?.maxlength" class="input-error">
+                Name cannot be more than 30 characters!
+            </p>
+            <div class="form-group">
+                <label for="description" class="font-weight-bold">Description</label>
+                <input [class.text-danger]="form.get('description').touched && !!form.get('description').errors" type="text" class="form-control" id="description"
+                       placeholder="Enter content" formControlName="description">
+            
+            </div>
+            <p *ngIf="form.get('description').touched && form.get('description').errors?.required" class="input-error">
+                Description is required!
+            </p>
+            <p *ngIf="form.get('description').touched && form.get('description').errors?.minlength" class="input-error">
+                Description must be at least 15 characters!
+            </p>
+            <p *ngIf="form.get('description').touched && form.get('description').errors?.maxlength" class="input-error">
+                Description cannot be more than 6000 characters!
+            </p>
+            <div class="form-group">
+                <label for="add-product-price" class="font-weight-bold">Price</label>
+                <input [class.text-danger]="form.get('price').touched && !!form.get('price').errors" type="number" 
+                min="0.01" step="any" class="form-control" id="add-product-price" name="price" formControlName="price">
+             
+            </div>
+            <p *ngIf="form.get('price').touched && form.get('price').errors?.required" class="input-error">
+                Price is required!
+            </p>
+            <p *ngIf="form.get('price').touched && form.get('price').errors?.min" class="input-error">
+                Please enter valid price!
+            </p>
+
+            <div class="form-group">
+                <label for="category" class="font-weight-bold">Category</label>
+                <select formControlName="category" multiple class="form-control" value="Select Category" name="category" id="category" required>
+                    <option *ngFor="let category of categories" [value]="category.name">{{category.name}}</option>
+                </select>
+                <p class="input-error" *ngIf="form.get('category').errors?.required">
+                     Please select category!
+                </p>
+            </div>
+
+            <div class="form-group">
+
+                <label for="file">File</label>        
+                <input formControlName="file" id="file" type="file" class="form-control" multiple="" 
+                (change)="onFileChange($event)">
+        
+                <div *ngIf="form.get('file').touched && form.get('file').invalid" class="alert alert-danger">
+                    <div *ngIf="form.get('file').errors?.required">File is required.</div>       
+                </div>
+        
+            </div>
+            <div style="display: flex;">
+           
+            <div id="images" formArrayName="images" *ngFor='let url of images; let i = index;'>
+                <div>
+                    <a (click)="removeSelectedFile(i)">
+                        <i style="color: red; position: relative; left: 82px; top: -25px; cursor: pointer;"
+                        class="fas fa-trash-alt"></i></a> 
+                    <img [src]="url" height="80" width="80" style="margin: 3px;">
+                </div>  
+             
+            </div>
+            </div>
+
+            <div class="form-group">
+                <label for="city" class="font-weight-bold">City</label>
+                <input [class.text-danger]="form.get('city').touched && !!form.get('city').errors" type="text" 
+                class="form-control" id="city" placeholder="Enter city" formControlName="city">
+            </div>
+            <p *ngIf="form.get('city').touched && form.get('city').errors?.required" class="input-error">
+                City is required!
+            </p>
+
+            <div class="form-group">
+                <label for="region" class="font-weight-bold">Region</label>
+                <input [class.text-danger]="form.get('region').touched && !!form.get('region').errors" 
+                class="form-control" id="region" placeholder="Enter region" formControlName="region">
+            </div>
+            <p *ngIf="form.get('region').touched && form.get('region').errors?.required" class="input-error">
+                Region is required!
+            </p>
+            <div class="form-group">
+                <label for="postCode" class="font-weight-bold">Post code</label>
+                <input [class.text-danger]="form.get('postCode').touched && !!form.get('postCode').errors" 
+                type="number" class="form-control" id="postCode" formControlName="postCode"
+                       placeholder="Enter your city post code">
+            </div>
+            <p *ngIf="form.get('postCode').touched && form.get('postCode').errors?.required" class="input-error">
+                Post Code is required!
+            </p>
+            <p *ngIf="form.get('postCode').touched && form.get('postCode').errors?.min" class="input-error">
+                Enter valid post code!
+            </p>
+            <p *ngIf="form.get('postCode').touched && form.get('postCode').errors?.max" class="input-error">
+                Enter valid post code!
+            </p>
+            <div class="form-group">
+                <label
+                 for="phoneNumber" class="font-weight-bold">Phone number</label>
+                <input  [class.text-danger]="form.get('phoneNumber').touched && !!form.get('phoneNumber').errors" 
+                 type="text" class="form-control" id="phoneNumber"
+                       placeholder="Enter your phone number" formControlName="phoneNumber">
+            </div>
+            <p *ngIf="form.get('phoneNumber').touched && form.get('phoneNumber').errors?.required" class="input-error">
+                Phone number is required!
+            </p>
+            <p *ngIf="form.get('phoneNumber').touched && form.get('phoneNumber').errors?.pattern" class="input-error">
+                Enter valid phone number!
+            </p>
+
+            <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Submit</button>
+        </form>
+</div>

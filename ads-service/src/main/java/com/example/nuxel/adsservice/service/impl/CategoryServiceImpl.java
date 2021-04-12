@@ -26,4 +26,10 @@ public class CategoryServiceImpl implements CategoryService {
                 .map(c-> this.modelMapper.map(c,CategoryServiceModel.class))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public CategoryServiceModel findByName(String name) {
+        return this.modelMapper.map(
+                this.categoryRepository.findByName(name), CategoryServiceModel.class);
+    }
 }

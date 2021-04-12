@@ -1,14 +1,14 @@
 package com.example.nuxel.adsservice.service.impl;
 
-import com.example.nuxel.adsservice.model.VO.ResponseTemplateVO;
 import com.example.nuxel.adsservice.model.bindingModels.AdAddBindingModel;
 import com.example.nuxel.adsservice.model.entities.Ad;
 import com.example.nuxel.adsservice.model.entities.Address;
+import com.example.nuxel.adsservice.model.entities.Category;
 import com.example.nuxel.adsservice.model.entities.Image;
-import com.example.nuxel.adsservice.model.entities.dtos.User;
 import com.example.nuxel.adsservice.repository.AdRepository;
 import com.example.nuxel.adsservice.service.AdService;
 import com.example.nuxel.adsservice.service.AddressService;
+import com.example.nuxel.adsservice.service.CategoryService;
 import com.example.nuxel.adsservice.service.CloudinaryService;
 import com.example.nuxel.adsservice.service.serviceModels.AddressServiceModel;
 import org.modelmapper.ModelMapper;
@@ -28,28 +28,19 @@ public class AdServiceImpl implements AdService {
     private final CloudinaryService cloudinaryService;
     private final AddressService addressService;
     private final ModelMapper modelMapper;
+    private final CategoryService categoryService;
 
-    public AdServiceImpl(AdRepository adRepository, RestTemplate restTemplate, CloudinaryService cloudinaryService, AddressService addressService, ModelMapper modelMapper) {
+    public AdServiceImpl(AdRepository adRepository, RestTemplate restTemplate, CloudinaryService cloudinaryService, AddressService addressService, ModelMapper modelMapper, CategoryService categoryService) {
         this.adRepository = adRepository;
         this.restTemplate = restTemplate;
         this.cloudinaryService = cloudinaryService;
         this.addressService = addressService;
         this.modelMapper = modelMapper;
-    }
-
-
-    @Override
-    public ResponseTemplateVO findAllByUserId(String userId) {
-        ResponseTemplateVO vo = new ResponseTemplateVO();
-        List<Ad> ads = adRepository.findAllByUserId(userId);
-        User user = restTemplate.getForObject("http://USER-SERVICE/api/users/" + userId,User.class);
-        vo.setAds(ads);
-        vo.setUser(user);
-        return vo;
+        this.categoryService = categoryService;
     }
 
     @Override
-    public void addAd(AdAddBindingModel adAddBindingModel) throws IOException {
+    public Ad addAd(AdAddBindingModel adAddBindingModel, MultipartFile[] files) throws IOException {
         Ad ad = this.modelMapper.map(adAddBindingModel,Ad.class);
         ad.setDate(LocalDate.now());
         AddressServiceModel addressServiceModel = addressService.seedAddress(adAddBindingModel.getCity(), adAddBindingModel.getRegion(),
@@ -57,15 +48,18 @@ public class AdServiceImpl implements AdService {
 
         ad.setAddress(this.modelMapper.map(addressServiceModel,Address.class));
         List<Image> images = new ArrayList<>();
-        for (MultipartFile adImage : adAddBindingModel.getImages()) {
+        for (MultipartFile adImage : files) {
             String imageUrl = adImage.isEmpty() ? "https://res.cloudinary.com/nuxel-application/image/upload/v1616937887/No-image-found_vtfx1x_ggyqam.jpg"
                     : this.cloudinaryService.uploadImageToCurrentFolder(adImage, "products");
             Image image = new Image();
             image.setUrl(imageUrl);
             images.add(image);
         }
-
+        Category category = this.modelMapper.map(this.categoryService
+                .findByName(adAddBindingModel.getCategory()), Category.class);
         ad.setImages(images);
+        ad.setCategory(category);
         this.adRepository.save(ad);
+        return ad;
     }
 }

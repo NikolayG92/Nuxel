@@ -17,7 +17,10 @@
                 <a routerLink="user/profile">Profile</a>
             </li>
             <li *ngIf="isLoggedIn()">
-                <a (click)="logout()">Logout</a>
+                <a routerLink="ad/add">Add Ad</a>
+            </li>
+            <li *ngIf="isLoggedIn()">
+                <a style="cursor: pointer;" (click)="logout()">Logout</a>
             </li>
    
             <li *ngIf="!isLoggedIn()">
