@@ -11,6 +11,8 @@ import { CoreModule } from './core/core.module';
 import { UserModule } from './user/user.module';
 import { TokenInterceptor } from './core/auth/token.interceptor';
 import { JwtModule } from '@auth0/angular-jwt';
+import { AdModule } from './ad/ad.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 export function tokenGetter() {
@@ -27,6 +29,7 @@ export function tokenGetter() {
     AppRoutingModule,
     CoreModule,
     UserModule,
+    AdModule,
     HttpClientModule,
     JwtModule.forRoot({
       config: {

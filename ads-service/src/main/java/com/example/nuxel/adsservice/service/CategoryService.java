@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface CategoryService {
     List<CategoryServiceModel> getAllCategories();
+
+    CategoryServiceModel findByName(String name);
 }
