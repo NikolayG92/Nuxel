@@ -11,13 +11,15 @@
                 <i class="fas fa-search"></i>
             </li>
             <li>
-                <a routerLink="/about">About Us</a>
-            </li>
-            <li *ngIf="isLoggedIn()">
-                <a routerLink="user/profile">Profile</a>
-            </li>
+                <a routerLink="about">About Us</a>
+            </li>       
             <li *ngIf="isLoggedIn()">
                 <a routerLink="ad/add">Add Ad</a>
+            </li>
+            <li *ngIf="isLoggedIn()">
+                <a routerLink="user/profile">
+                    Profile
+                </a>
             </li>
             <li *ngIf="isLoggedIn()">
                 <a style="cursor: pointer;" (click)="logout()">Logout</a>
@@ -27,7 +29,7 @@
                 <a routerLink="user/login">Login</a>
             </li>
             <li *ngIf="!isLoggedIn()">
-                <a routerLink="/user/register">Register</a>
+                <a routerLink="user/register">Register</a>
             </li>
         </ul>
     

@@ -12,7 +12,7 @@ import { UserModel } from './user-model';
 })
 export class UserService {
 
-  apiUrl = environment.apiUrl + "/users";
+  apiUrl = environment.usersApiUrl + "/users";
   currentUser: any | null;
   resp: HttpResponse<String>;
   loggedUser: string;
@@ -45,11 +45,18 @@ export class UserService {
       )
   }
 
-  edit(user: FormData): Observable<any> {
-    return this.http.post(`${this.apiUrl}/edit`, user);
-
+  changeProfilePicture(user: FormData): Observable<any> {
+    return this.http.post(`${this.apiUrl}/changeProfilePicture`, user);
   }
 
+  changePassword(user: FormData): Observable<any>{
+    return this.http.post(`${this.apiUrl}/changePassword`, user);
+  }
+
+  changeProfileDetails(user: FormData): Observable<any> {
+    return this.http.post(`${this.apiUrl}/changeProfileDetails`, user);
+  }
+  
   logout() {
     this.isLoggedIn$.next(false);
     this.loggedUser = null;

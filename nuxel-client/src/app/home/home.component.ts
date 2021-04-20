@@ -1,4 +1,4 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
+import { Component, DoCheck, OnChanges, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtService } from '../core/auth/services/jwt.service';
 import { UserService } from '../user/user.service';
@@ -8,13 +8,11 @@ import { UserService } from '../user/user.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent{
 
   isLogged = false;
 
   url: string;
- 
-
   userId: string;
   username: string;
   hasCompletedAccountSetup: boolean;
@@ -22,7 +20,8 @@ export class HomeComponent {
   constructor(private userService: UserService,
      private jwtHelper: JwtService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   getUserDetails() {
     this.userId = this.jwtHelper.getUserId;

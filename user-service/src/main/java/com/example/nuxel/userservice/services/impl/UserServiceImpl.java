@@ -1,16 +1,22 @@
 package com.example.nuxel.userservice.services.impl;
 
 import com.example.nuxel.userservice.config.jwt.JwtUtils;
+import com.example.nuxel.userservice.exceptions.PasswordDoNotMatchException;
 import com.example.nuxel.userservice.exceptions.UserNotFoundException;
 import com.example.nuxel.userservice.model.bindingModels.LoginBindingModel;
+import com.example.nuxel.userservice.model.bindingModels.UserEditBindingModel;
 import com.example.nuxel.userservice.model.bindingModels.UserRegisterBindingModel;
+import com.example.nuxel.userservice.model.entities.Gender;
 import com.example.nuxel.userservice.model.entities.ProfileDetails;
 import com.example.nuxel.userservice.model.entities.User;
 import com.example.nuxel.userservice.model.view.LoginViewModel;
 import com.example.nuxel.userservice.model.view.RegisterViewModel;
+import com.example.nuxel.userservice.repositories.ProfileDetailsRepository;
 import com.example.nuxel.userservice.repositories.UserRepository;
+import com.example.nuxel.userservice.services.CloudinaryService;
 import com.example.nuxel.userservice.services.RoleService;
 import com.example.nuxel.userservice.services.UserService;
+import com.example.nuxel.userservice.services.serviceModels.ProfileDetailsServiceModel;
 import com.example.nuxel.userservice.services.serviceModels.UserServiceModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,13 +24,16 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityExistsException;
+import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
@@ -34,13 +43,17 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private final RoleService roleService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final JwtUtils jwtUtils;
+    private final CloudinaryService cloudinaryService;
+    private final ProfileDetailsRepository profileDetailsRepository;
 
-    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, RoleService roleService, BCryptPasswordEncoder bCryptPasswordEncoder, JwtUtils jwtUtils) {
+    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, RoleService roleService, BCryptPasswordEncoder bCryptPasswordEncoder, JwtUtils jwtUtils, CloudinaryService cloudinaryService, ProfileDetailsRepository profileDetailsRepository) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
         this.roleService = roleService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.jwtUtils = jwtUtils;
+        this.cloudinaryService = cloudinaryService;
+        this.profileDetailsRepository = profileDetailsRepository;
     }
 
     @Override
@@ -58,8 +71,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public UserServiceModel findUserByUsername(String username) {
         User user = this.userRepository.findUserByUsername(username)
                 .orElse(null);
-
-        return this.modelMapper.map(user, UserServiceModel.class);
+        UserServiceModel userServiceModel = this.modelMapper.map(user, UserServiceModel.class);
+        ProfileDetailsServiceModel profileDetailsServiceModel = this.modelMapper
+                .map(user.getProfileDetails(), ProfileDetailsServiceModel.class);
+        userServiceModel.setProfileDetails(profileDetailsServiceModel);
+        return userServiceModel;
     }
 
     @Override
@@ -88,7 +104,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setProfileDetails(new ProfileDetails());
         user.setRegisteredOn(LocalDateTime.now());
-        user.getProfileDetails().setImageUrl("https://res.cloudinary.com/nuxel-application/image/upload/v1617252803/no-profile-img_pqxacn.png");
+        user.getProfileDetails().setImageUrl("https://res.cloudinary.com/nuxel-application/image/upload/v1618494650/blank-profile-picture-973460_1280_l0xqhh.webp");
 
 
         this.userRepository.saveAndFlush(user);
@@ -119,6 +135,48 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public UserServiceModel findUserByEmail(String email) {
         User user = this.userRepository.findUserByEmail(email).orElse(null);
         return this.modelMapper.map(user, UserServiceModel.class);
+    }
+
+    @Override
+    public UserServiceModel changeProfilePicture(String name, MultipartFile file) throws IOException, UserNotFoundException {
+        String imageUrl = this.cloudinaryService.uploadImageToCurrentFolder(file, "profile-pictures");
+        User user = this.userRepository.findUserByUsername(name).orElseThrow(() -> new UserNotFoundException("No such user exists!"));
+        user.getProfileDetails().setImageUrl(imageUrl);
+        this.userRepository.saveAndFlush(user);
+
+        return this.modelMapper.map(user, UserServiceModel.class);
+    }
+
+    @Override
+    public UserServiceModel changePassword(String oldPassword, String newPassword, String username) throws UserNotFoundException, PasswordDoNotMatchException {
+        User user = this.userRepository.findUserByUsername(username)
+                .orElseThrow(() -> new UserNotFoundException(String.format("%s user not found", username)));
+        if(this.bCryptPasswordEncoder.matches(oldPassword, user.getPassword())){
+            user.setPassword(this.bCryptPasswordEncoder.encode(newPassword));
+            this.userRepository.saveAndFlush(user);
+        }else {
+            throw new PasswordDoNotMatchException("Old password is wrong!");
+        }
+
+        return this.modelMapper.map(user, UserServiceModel.class);
+    }
+
+    @Override
+    public UserServiceModel changeProfileDetails(UserEditBindingModel userEditBindingModel, String name) throws UserNotFoundException {
+        User user = this.userRepository.findUserByUsername(name)
+                .orElseThrow(() -> new UserNotFoundException("No such user exists!"));
+        user.getProfileDetails().setFirstName(userEditBindingModel.getFirstName());
+        user.getProfileDetails().setLastName(userEditBindingModel.getLastName());
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate localDate = LocalDate.parse(userEditBindingModel.getDateOfBirth().substring(0, 10), formatter);
+        user.getProfileDetails().setDateOfBirth(localDate);
+        user.getProfileDetails().setPhoneNumber(userEditBindingModel.getPhoneNumber());
+        user.getProfileDetails().setGender(Gender.valueOf(userEditBindingModel.getGender()));
+        this.userRepository.saveAndFlush(user);
+
+        return this.modelMapper.
+                map(user, UserServiceModel.class);
     }
 
     @Override

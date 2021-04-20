@@ -15,5 +15,7 @@ public class UserServiceModel {
     private String username;
     private String password;
     private String email;
+    private String registeredOn;
+    private ProfileDetailsServiceModel profileDetails;
     private Set<RoleServiceModel> authorities;
 }
