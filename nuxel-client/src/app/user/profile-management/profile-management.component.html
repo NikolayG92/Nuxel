@@ -1,0 +1,14 @@
+<article class="profile-management">
+    <img [src]="image">
+    <form #f="ngForm" class="form-group">
+     <div class="form-item">
+         <button class="change-photo" (click)="imageUrl.click()" ><i class="fas fa-camera"></i></button>
+         <input hidden #imageUrl type="file" (change)="onImageSelected($event)"/>
+     </div> 
+    </form>         
+    <button routerLink="/user/profile">About me</button>
+    <button routerLink="/user/changePassword">Change password</button>
+    <button routerLink="/user/profileDetails">Profile Details</button>
+    <button routerLink="/user/myAds">My Ads</button>
+    <button routerLink="/user/messages">Messages</button>
+</article>

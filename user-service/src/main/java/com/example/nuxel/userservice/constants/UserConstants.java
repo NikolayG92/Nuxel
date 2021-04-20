@@ -14,4 +14,5 @@ public class UserConstants {
     public final static String FIRST_NAME_LENGTH_IS_INVALID = "Please enter first name!";
     public final static String LAST_NAME_LENGTH_IS_INVALID = "Please enter last name!";
     public final static String OLD_PASSWORD_ERROR = "This is not your password!";
+    public final static String DATE_IS_NOT_VALID = "Date cannot be in the future!";
 }

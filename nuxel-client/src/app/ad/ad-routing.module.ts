@@ -15,7 +15,7 @@ const routes: Routes = [
         data: {
           isLogged: true,
           title: 'ADD AD'
-        },
+        }
       }
     ]
   }

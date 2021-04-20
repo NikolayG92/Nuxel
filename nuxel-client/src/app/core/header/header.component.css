@@ -40,3 +40,14 @@ nav {
     right: 25px;
     top: 2px;
 }
+
+.nav-image {
+    width: 26px;
+    height: 26px;
+    border-radius: 20px;
+}
+
+.nav-image:hover {
+    width: 30px;
+    height: 30px;
+}

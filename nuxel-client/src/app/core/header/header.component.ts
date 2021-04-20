@@ -16,14 +16,20 @@ export class HeaderComponent {
 
   constructor(private userService: UserService,
      private router: Router, 
-     private jwtHelper: JwtService) { }
+     private jwtHelper: JwtService) { 
+    
+     }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+   
+  }
 
   getUserDetails() {
     this.userId = this.jwtHelper.getUserId;
-    this.username = this.jwtHelper.getUsername;
-  }
+    this.username = this.jwtHelper.getUsername;  
+    
+ }
+    
 
   isLoggedIn() {
 
@@ -33,7 +39,10 @@ export class HeaderComponent {
 
   logout() {
     this.userService.logout();
-    this.router.navigate(['/']);
+    this.router.navigate(['/'])
+    .then(() => {
+      window.location.reload();
+    });
   }
 
 }

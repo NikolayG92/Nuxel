@@ -1,0 +1,46 @@
+
+.profile-management {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin-right: 150px;
+}
+
+.profile-management img{
+    border-bottom: 2px solid black;
+    border-radius: 220px;
+    width: 220px;
+    height: 220px;
+    border: none;
+    margin-top: 20px;
+    margin-left: 30px;
+}
+
+.profile-management button {
+    border: none;
+    background: white;
+    font-family: sans-serif;
+    display: flex;
+    border-bottom: 1px solid;
+    height: 50px;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.change-photo {
+    align-content: center;
+    justify-content: center;
+    width: 100px;
+    left: 82px;
+    position: relative;
+    margin-top: 20px;
+}
+
+.profile-management button:hover {
+    background: #372876;
+    color: white;
+}
+
+.profile-management button:last-child{
+    margin-bottom: 100px;
+}

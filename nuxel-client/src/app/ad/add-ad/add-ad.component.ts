@@ -33,7 +33,7 @@ export class AddAdComponent implements OnInit {
           region: ['', [Validators.required]],
           postCode: ['', [Validators.min(1000), Validators.max(9999)]],
           phoneNumber: ['', [Validators.required, Validators.pattern("^(0[8,9][0-9]{8})$")]],
-          file: new FormControl('', [Validators.required])
+          images: ['', [Validators.required]]
         });
                }
  
@@ -54,11 +54,11 @@ export class AddAdComponent implements OnInit {
     formData.append('ad', new Blob([JSON.stringify(data)], {
       type: "application/json"
     }));
+    //this.files = this.images;
     for (let i = 0; i < this.files.length; i++) {
       formData.append('files', this.files[i]);
       
     }
-  
     this.adService.addAdd(formData).subscribe({
       next: () => {
         this.router.navigate(['/home']);
@@ -96,7 +96,7 @@ export class AddAdComponent implements OnInit {
 
   removeSelectedFile(i){
     this.images.splice(i, 1);
-  
+    this.files.splice(i, 1);
   }
 }
 
