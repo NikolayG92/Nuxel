@@ -89,7 +89,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.setProfileDetails(new ProfileDetails());
         user.setRegisteredOn(LocalDateTime.now());
         user.getProfileDetails().setImageUrl("https://res.cloudinary.com/nuxel-application/image/upload/v1617252803/no-profile-img_pqxacn.png");
-
+        
 
         this.userRepository.saveAndFlush(user);
 

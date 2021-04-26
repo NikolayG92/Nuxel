@@ -13,6 +13,9 @@ import { TokenInterceptor } from './core/auth/token.interceptor';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AdModule } from './ad/ad.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CategoryListComponent } from './category/category-list/category-list.component';
+import { CategoryComponent } from './category/category/category.component';
+import { CategoryModule } from './category/category.module';
 
 
 export function tokenGetter() {
@@ -22,7 +25,9 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    CategoryListComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +35,7 @@ export function tokenGetter() {
     CoreModule,
     UserModule,
     AdModule,
+    CategoryModule,
     HttpClientModule,
     JwtModule.forRoot({
       config: {

@@ -4,11 +4,13 @@ import { AddAdComponent } from './add-ad/add-ad.component';
 import { AdRoutingModule } from './ad-routing.module';
 import { AdService } from './ad.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AdsByCategoryComponent } from './ads-by-category/ads-by-category.component';
+import { AdDetailsComponent } from './ad-details/ad-details.component';
 
 
 
 @NgModule({
-  declarations: [AddAdComponent],
+  declarations: [AddAdComponent, AdsByCategoryComponent, AdDetailsComponent],
   imports: [
     CommonModule,
     AdRoutingModule,

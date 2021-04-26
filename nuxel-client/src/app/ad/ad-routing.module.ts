@@ -1,5 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../core/guards/auth.guard';
+import { AdDetailsComponent } from './ad-details/ad-details.component';
 import { AddAdComponent } from './add-ad/add-ad.component';
 
 const routes: Routes = [
@@ -16,6 +17,10 @@ const routes: Routes = [
           isLogged: true,
           title: 'ADD AD'
         },
+      },
+      {
+        path: 'details/:id',
+        component: AdDetailsComponent
       }
     ]
   }

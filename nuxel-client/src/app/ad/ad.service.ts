@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { environment } from 'src/environments/environment';
 import { UserService } from "../user/user.service";
 import { AdModel } from "./ad-add-model";
-
+import { AllAdModel } from "./all-add-model";
 @Injectable({
     providedIn: 'root'
   })
@@ -21,6 +21,14 @@ import { AdModel } from "./ad-add-model";
     addAdd(ad: FormData){
       return this.http.post<AdModel>(`${this.apiUrl}/add`, ad);
     }
+
+     adsByCategory(id: string){
+       return this.http.get<AllAdModel[]>(`${this.apiUrl}/allByCategory/${id}`)
+     }
+
+     getAdById(id: string){
+       return this.http.get<AllAdModel>(`${this.apiUrl}/details/${id}`);
+     }
 
   }
   

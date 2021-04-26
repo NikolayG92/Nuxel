@@ -17,6 +17,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/ads")
@@ -47,6 +48,20 @@ public class AdController{
         ad.setFiles(files);
         return ResponseEntity.ok(adService.addAd(ad, files));
 
+    }
+
+    @GetMapping("/allByCategory/{id}")
+    public ResponseEntity<List<AdServiceModel>> getAllUsers(@PathVariable("id") String id){
+        List<AdServiceModel> allAdsByCategory = this.adService.getAllAdsByCategory(id);
+        return ResponseEntity
+                .ok()
+                .body(allAdsByCategory);
+    }
+
+    @GetMapping("/details/{id}")
+    public ResponseEntity<AdServiceModel> getById(@PathVariable("id") String id){
+
+        return ResponseEntity.ok(this.adService.getById(id));
     }
 
 }

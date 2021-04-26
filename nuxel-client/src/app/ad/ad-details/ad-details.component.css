@@ -1,0 +1,39 @@
+img {
+    height: 300px;
+    width: 500px;
+}
+
+
+.ad-info-div {
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.ad-name {
+    text-align: center;
+    font-weight:700;
+}
+
+.ad-date {
+    text-align: left;
+}
+
+.ad-price {
+    text-align: left;
+    font-weight:700;
+}
+
+.ad-seller {
+    position: relative;
+    left: 180px;
+    top: -135px;
+}
+
+
+.ad-location {
+    position: relative;
+    left: 180px;    
+}

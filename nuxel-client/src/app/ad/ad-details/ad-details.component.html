@@ -1,0 +1,42 @@
+
+
+<div>
+   <h1 class="ad-name"><span>{{ ad.name }}</span></h1>
+   <div class="container text-center" style="margin-right: -70px">
+    <div style="display: table-cell; justify-content:  space-around">
+        <div class="row">
+            <div class="col">
+                <button (click)="changePhoto('-')" *ngIf="currentIndex > 0">-</button>
+                <img src= "{{currentImage.url}}">   
+                <button (click)="changePhoto('+')" *ngIf="currentIndex + 1 < ad.images.length && ad.images.length > 1">+</button>  
+            </div>
+        </div>
+        <div class="ad-date">
+            <h6>Added: {{ad.date | date }}</h6>
+        </div>
+        <div>
+            <h3 class="ad-price"><span>{{ ad.price | number }} $</span></h3>
+        </div>
+        <div>
+            <span><h5 class="text-left">Description :</h5>{{ad.description}}</span>
+        </div>    
+    </div>
+    <div  style="display: table-cell">
+        <div class="ad-seller">
+            <h5>Seller :</h5>
+            <div>
+                <div>
+                    
+                </div>
+               
+            </div>
+        </div>
+        <div class="ad-location" > 
+            <h5>Location : </h5>
+            <div class="ad-info-div">
+                <span>{{ad.address.city}}, {{ad.address.region}}</span>
+            </div>
+        </div>
+    </div>
+   </div>
+</div>

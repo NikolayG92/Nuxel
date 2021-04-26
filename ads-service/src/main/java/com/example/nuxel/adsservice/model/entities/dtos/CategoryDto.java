@@ -11,4 +11,6 @@ import lombok.Setter;
 public class CategoryDto {
     @Expose
     private String name;
+    @Expose
+    private String imageUrl;
 }

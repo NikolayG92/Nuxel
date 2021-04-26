@@ -33,6 +33,7 @@ public class CategoryInitialization implements CommandLineRunner {
                             e -> {
                                 Category category = new Category();
                                 category.setName(e.getName());
+                                category.setImageUrl(e.getImageUrl());
                                 categoryRepository.save(category);
                             }
                     );
