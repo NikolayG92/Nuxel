@@ -3,5 +3,8 @@ export interface UserModel{
     email: string;
     imageUrl: string;
     password: string;
-    username: Date;
+    registeredOn: Date;
+    username: string;
+    dateOfBirth: Date;
+    gender: String;
 }

@@ -16,11 +16,15 @@ const routes: Routes = [
         data: {
           isLogged: true,
           title: 'ADD AD'
+<<<<<<< HEAD
         },
       },
       {
         path: 'details/:id',
         component: AdDetailsComponent
+=======
+        }
+>>>>>>> d286830f27b0cd866399c686b90aa91b9b4e0bf2
       }
     ]
   }

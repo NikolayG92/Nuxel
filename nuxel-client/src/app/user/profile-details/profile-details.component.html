@@ -1,0 +1,64 @@
+<div>
+    <section class="profile-section">
+       <app-profile-management></app-profile-management>
+       <article style="width: 50%;">
+        <h1>Profile Details</h1>
+        <div class="profile-details-form">
+
+            <form [formGroup]="form" (ngSubmit)="submitHandler()">
+                <div>
+                    <label for="firstName">First Name</label>
+                    <input type="text" name="firstName" id="firstName" [(ngModel)]="currentUser.profileDetails.firstName" formControlName="firstName">
+                </div>
+                <p *ngIf="form.get('firstName').touched && form.get('firstName').errors?.required" class="input-error">
+                    First name is required!
+                </p>
+                <div>
+                    <label for="lastName">Last Name</label>
+                    <input type="text"
+                    name="lastName" id="lastName" [(ngModel)]="currentUser.profileDetails.lastName" formControlName="lastName">
+                </div>
+
+                <div>
+                    <label for="dateOfBirth">Date of Birth</label>
+                    <input
+                    [(ngModel)]="currentUser.profileDetails.dateOfBirth" type="date"
+                    name="dateOfBirth" id="dateOfBirth" formControlName="dateOfBirth">
+                </div>
+                <p *ngIf="errorMessage" class="input-error">
+                    {{errorMessage}}
+                </p>
+                <div>
+                    <label for="phoneNumber">Phone number</label>
+                    <input [class.text-danger]="!!form.get('phoneNumber').errors" 
+                    [(ngModel)]="currentUser.profileDetails.phoneNumber"
+                     type="text" id="phoneNumber" formControlName="phoneNumber">
+                </div>
+                <p *ngIf="form.get('phoneNumber').errors?.pattern" class="input-error">
+                    Enter valid phone number!
+                </p>
+
+                <div>
+                    <label for="gender">Gender</label>
+                    <select [class.text-danger]="form.get('gender').touched && !!form.get('gender').errors" 
+                    [(ngModel)]="currentUser.profileDetails.gender"
+                    formControlName="gender">
+                        <option value="MALE">
+                            Male
+                        </option>
+                        <option value="FEMALE">
+                            Female
+                        </option>                   
+                     </select>
+                </div>
+                <p *ngIf="form.get('gender').touched && form.get('gender').errors?.required" class="input-error">
+                    Please select gender!
+                </p>
+                <div class="btn-container">
+                    <button [disabled]="form.invalid" class="confirm-btn" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+       </article>
+    </section>
+ </div>

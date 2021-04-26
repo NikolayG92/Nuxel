@@ -22,7 +22,10 @@ export class LoginComponent implements OnInit {
     this.errorMessage = '';
     this.userService.login(formValue).subscribe({
       next: () => {
-        this.router.navigate(['/']);
+        this.router.navigate(['/'])
+        .then(() => {
+          window.location.reload();
+        });
       },
       error: () => {
         this.errorMessage = "Wrong username or password!";

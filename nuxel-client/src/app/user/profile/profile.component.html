@@ -1,0 +1,16 @@
+<div>
+   <section class="profile-section">
+      <app-profile-management></app-profile-management>
+      <article style="width: 50%;">
+       <h1>About Me</h1>
+       <div class="about-me">
+          <span>Username: {{currentUser.username}}</span>
+          <span>Email: {{currentUser.email}}</span>
+          <span>Fullname: {{currentUser.profileDetails.firstName}} {{currentUser.profileDetails.lastName}}</span>
+          <span>Registered on: {{currentUser.registeredOn}}</span>
+          <span>Age: {{currentUser.age}}</span>
+          <span>Phone number: {{currentUser.profileDetails.phoneNumber}}</span>
+       </div>
+      </article>
+   </section>
+</div>
