@@ -1,0 +1,52 @@
+img {
+    height: 300px;
+    width: 500px;
+}
+
+
+.ad-info-div {
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.ad-image {
+    position: relative;
+    right: 253px;
+}
+
+.ad-seller-image{
+    width: 100px;
+    height: 100px;  
+    border-radius: 50%
+}
+
+.ad-name {
+    text-align: center;
+    font-weight:700;
+}
+
+.ad-date {
+    position: relative;
+    right: 446px;  
+}
+
+.ad-price {
+    position: relative;
+    right: 482px;
+}
+
+.ad-seller {
+    position: relative;
+    left: 180px;
+    top: -135px;
+}
+
+
+.ad-location {
+    position: relative;
+    left: 180px;    
+    bottom: 80px;
+}

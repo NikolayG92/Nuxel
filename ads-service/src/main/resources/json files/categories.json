@@ -1,29 +1,38 @@
 [
   {
-    "name": "Electronics"
+    "name": "Electronics",
+    "imageUrl": "https://res.cloudinary.com/nuxel-application/image/upload/v1616743270/categories/Electronics_wyxv5y.png"
   },
   {
-    "name": "Vehicle"
+    "name": "Vehicle",
+    "imageUrl": "https://res.cloudinary.com/nuxel-application/image/upload/v1616743271/categories/vehicles_hisu5k.jpg"
   },
   {
-    "name": "Real Estate"
+    "name": "Real Estate",
+    "imageUrl": "https://res.cloudinary.com/nuxel-application/image/upload/v1616743270/categories/real-estate_xdar6i.jpg"
   },
   {
-    "name": "Sport"
+    "name": "Sport",
+    "imageUrl": "https://res.cloudinary.com/nuxel-application/image/upload/v1616743271/categories/sport_hwgme7.png"
   },
   {
-    "name": "Pets"
+    "name": "Pets",
+    "imageUrl": "https://res.cloudinary.com/nuxel-application/image/upload/v1616743270/categories/pets_nw74ei.jpg"
   },
   {
-    "name": "Home and Garden"
+    "name": "Home and Garden",
+    "imageUrl": "https://res.cloudinary.com/nuxel-application/image/upload/v1616743270/categories/home-and-garden_ruiyji.jpg"
   },
   {
-    "name": "Baby and Kids"
+    "name": "Baby and Kids",
+    "imageUrl": "https://res.cloudinary.com/nuxel-application/image/upload/v1616743270/categories/baby-and-kids_ietgzg.jpg"
   },
   {
-    "name": "Services"
+    "name": "Services",
+    "imageUrl": "https://res.cloudinary.com/nuxel-application/image/upload/v1616743271/categories/services_cg3jgj.jpg"
   },
   {
-    "name": "Tools"
+    "name": "Tools",
+    "imageUrl": "https://res.cloudinary.com/nuxel-application/image/upload/v1616743271/categories/tools_xaph0w.jpg"
   }
 ]

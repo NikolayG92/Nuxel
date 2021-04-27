@@ -32,4 +32,6 @@ public interface UserService extends UserDetailsService {
     UserServiceModel changePassword(String oldPassword, String newPassword, String username) throws UserNotFoundException, PasswordDoNotMatchException;
 
     UserServiceModel changeProfileDetails(UserEditBindingModel userEditBindingModel, String name) throws UserNotFoundException;
+
+    UserServiceModel findUserById(String id);
 }

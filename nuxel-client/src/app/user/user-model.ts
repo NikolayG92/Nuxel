@@ -6,5 +6,6 @@ export interface UserModel{
     registeredOn: Date;
     username: string;
     dateOfBirth: Date;
+    profileDetails: any
     gender: String;
 }

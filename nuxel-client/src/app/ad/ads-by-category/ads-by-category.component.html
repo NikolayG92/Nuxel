@@ -1,0 +1,32 @@
+<table class="ads-list">
+    <div class="mt-3">
+      <h3 class="text-center text-dark">{{category.name}}</h3>
+   
+        <tr *ngFor="let ad of adsByCategory;">
+          
+          <td>
+            <div *ngFor="let image of ad.images; let i=index">
+              <div *ngIf="i < 1">
+                <a routerLink="/ad/details/{{ad.id}}">
+                <img [src]= "image.url">
+              </a>
+               
+              </div>
+            </div>
+          </td>
+          <td class="ad-name">{{ ad.name }}</td>
+
+          
+          <td class="ad-city">{{ad.address.city}}, {{ad.address.region}}</td>
+
+          <td class="ad-date">{{ad.date | date }}</td>
+
+          <td class="ad-price">{{ ad.price | number }}$</td>
+       
+        </tr>
+     
+       
+
+         
+    </div>
+</table>

@@ -21,6 +21,7 @@ public class AdServiceModel extends BaseServiceModel {
     private LocalDate date;
     private Address address;
     private Category category;
+    private String userId;
     private List<Message> messages;
     private List<ImageServiceModel> images;
 }

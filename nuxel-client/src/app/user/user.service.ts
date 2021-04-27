@@ -75,6 +75,9 @@ export class UserService {
   }
 
 
+  getSellerById(id: String){
+    return this.http.get<UserModel>(`${this.apiUrl}/${id}`);
+  }
 
   isLoggedIn() {
     return !!this.getJwtToken();

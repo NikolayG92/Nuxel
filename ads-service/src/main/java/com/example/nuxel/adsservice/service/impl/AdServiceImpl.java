@@ -10,16 +10,21 @@ import com.example.nuxel.adsservice.service.AdService;
 import com.example.nuxel.adsservice.service.AddressService;
 import com.example.nuxel.adsservice.service.CategoryService;
 import com.example.nuxel.adsservice.service.CloudinaryService;
+import com.example.nuxel.adsservice.service.serviceModels.AdServiceModel;
 import com.example.nuxel.adsservice.service.serviceModels.AddressServiceModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.Table;
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class AdServiceImpl implements AdService {
@@ -61,5 +66,20 @@ public class AdServiceImpl implements AdService {
         ad.setCategory(category);
         this.adRepository.save(ad);
         return ad;
+    }
+
+    @Transactional
+    @Override
+    public List<AdServiceModel> getAllAdsByCategory(String id) {
+             return this.adRepository.findAllByCategoryId(id).stream()
+                .map(c -> this.modelMapper.map(c, AdServiceModel.class))
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    @Override
+    public AdServiceModel getById(String id) {
+        Ad ad = this.adRepository.findById(id).orElse(null);
+        return this.modelMapper.map(ad, AdServiceModel.class);
     }
 }

@@ -1,0 +1,50 @@
+.ads-list {
+    display: flex;
+    justify-content: center;
+}
+
+.ads-list > div {
+    width: 80%;
+}
+
+img { 
+    border-right: 1px solid;
+    margin-right: 20px;
+    width: 100px;
+    height: 100px;
+}
+
+tr {
+  
+    border: 1px solid;
+}
+
+.ad-name {
+    display: flex;
+    position: relative;
+    top: -35px;
+    left: -12px;
+}
+
+.ad-city {
+    position: relative;
+    top: 40px;
+    left: -60px;
+}
+
+.ad-region {
+    position: relative;
+    top: 40px;
+    left: -60px;
+}
+
+.ad-date { 
+    position: relative;
+    top: 40px;
+    left: 40px;
+}
+
+.ad-price {
+    position: relative;
+    top: -30px;
+}

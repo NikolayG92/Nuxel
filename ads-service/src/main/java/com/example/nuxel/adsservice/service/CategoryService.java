@@ -8,4 +8,6 @@ public interface CategoryService {
     List<CategoryServiceModel> getAllCategories();
 
     CategoryServiceModel findByName(String name);
+
+    CategoryServiceModel findCategoryById(String id);
 }

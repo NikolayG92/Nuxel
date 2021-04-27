@@ -9,4 +9,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CategoryViewModel extends BaseViewModel {
     private String name;
+    private String imageUrl;
+
 }
