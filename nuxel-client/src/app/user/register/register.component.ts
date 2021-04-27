@@ -35,7 +35,7 @@ export class RegisterComponent implements OnInit {
 
     this.userService.register(data).subscribe({
       next: () => {
-        this.router.navigate(['/user/login']);
+        this.router.navigate(['/user/login'], {queryParams: { registered: true }});
       },
       error: (error) => {
            this.errorMessage = "User with that credentials already exists!";

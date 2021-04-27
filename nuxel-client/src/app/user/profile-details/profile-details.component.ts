@@ -43,7 +43,7 @@ export class ProfileDetailsComponent implements OnInit {
     }else {
      this.userService.changeProfileDetails(data).subscribe({
       next: () => {
-        this.router.navigate(['/user/profile']);
+        this.router.navigate(['/user/profile'], {queryParams : { changed: true }});
       }
     });
     }

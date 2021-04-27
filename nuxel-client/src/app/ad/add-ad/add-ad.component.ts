@@ -60,7 +60,7 @@ export class AddAdComponent implements OnInit {
     }
     this.adService.addAdd(formData).subscribe({
       next: () => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/home'], {queryParams : { createdAdd: true }});
       }
     });
     

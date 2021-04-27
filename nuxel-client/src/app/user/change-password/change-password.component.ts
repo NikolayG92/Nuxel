@@ -35,7 +35,7 @@ export class ChangePasswordComponent implements OnInit {
 
     this.userService.changePassword(data).subscribe({
       next: () => {
-        this.router.navigate(['/user/profileDetails']);
+        this.router.navigate(['/user/profile'], {queryParams : { changed: true }});
       },
       error: () => {
         this.errorMessage = 'Your old password is wrong!';
