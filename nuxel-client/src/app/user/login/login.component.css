@@ -127,7 +127,7 @@
     height: 200px;
     background-size: cover;
     opacity: 0.3;
-    left: 220px;
+    left: 240px;
     top: 210px;
 }
 
@@ -145,4 +145,16 @@
 
 .input-error {
     color: red;
+}
+
+.info-message {
+    background: green;
+    color: white;
+    margin-bottom: 20px;
+    width: 300px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 29px;
 }

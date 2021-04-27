@@ -24,3 +24,15 @@ article h1 {
 .about-me span {
     margin-top: 20px;
 }
+
+.info-message {
+    background: green;
+    color: white;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 29px;
+}

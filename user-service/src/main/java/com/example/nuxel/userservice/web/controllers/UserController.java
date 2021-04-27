@@ -115,8 +115,6 @@ public class UserController {
     @PostMapping("/changePassword")
     public ResponseEntity<UserServiceModel> changePassword(@Valid @RequestBody UserEditBindingModel userEditBindingModel,
                                                            Principal principal, BindingResult result) throws UserNotFoundException, PasswordDoNotMatchException {
-
-        userEditValidator.validate(userEditBindingModel, result);
         return ResponseEntity.ok()
                 .body(this.userService.changePassword(userEditBindingModel.getOldPassword(),
                         userEditBindingModel.getNewPassword(), principal.getName()));

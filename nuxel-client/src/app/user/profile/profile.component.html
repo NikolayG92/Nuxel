@@ -2,6 +2,7 @@
    <section class="profile-section">
       <app-profile-management></app-profile-management>
       <article style="width: 50%;">
+      <span class="info-message" *ngIf="infoMessage.length > 0">{{ infoMessage }}</span>
        <h1>About Me</h1>
        <div class="about-me">
           <span>Username: {{currentUser.username}}</span>

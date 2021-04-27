@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="login-form">
-
+        <span class="info-message" *ngIf="infoMessage.length > 0">{{ infoMessage }}</span>
         <form #f="ngForm" (ngSubmit)="submitFormHandler(f.value)">
 
             <div>
@@ -40,7 +40,7 @@
             <div class="btn-container">
                 <button [disabled]="f.invalid" class="login-btn" type="submit">Login</button>
                 <span>OR</span>
-                <a routerLink="user/register">Sign Up</a>
+                <a routerLink="/user/register">Sign Up</a>
             </div>
         </form>
     </div>

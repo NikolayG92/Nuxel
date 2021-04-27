@@ -12,8 +12,8 @@ import { UserModule } from './user/user.module';
 import { TokenInterceptor } from './core/auth/token.interceptor';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AdModule } from './ad/ad.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { AboutModule } from './about/about.module';
+;
 
 export function tokenGetter() {
   return localStorage.getItem('JWT_TOKEN');
@@ -30,6 +30,7 @@ export function tokenGetter() {
     CoreModule,
     UserModule,
     AdModule,
+    AboutModule,
     HttpClientModule,
     JwtModule.forRoot({
       config: {

@@ -54,14 +54,13 @@ export class AddAdComponent implements OnInit {
     formData.append('ad', new Blob([JSON.stringify(data)], {
       type: "application/json"
     }));
-    //this.files = this.images;
     for (let i = 0; i < this.files.length; i++) {
       formData.append('files', this.files[i]);
       
     }
     this.adService.addAdd(formData).subscribe({
       next: () => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/home'], {queryParams : { createdAdd: true }});
       }
     });
     

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../user.service';
 
 @Component({
@@ -10,12 +10,19 @@ import { UserService } from '../user.service';
 export class LoginComponent implements OnInit {
 
   errorMessage = '';
-
+  infoMessage = '';
   constructor(private userService: UserService,
-    private router: Router) { }
+    private router: Router,
+    private route: ActivatedRoute) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit() {
+        this.route.queryParams
+          .subscribe(params => {
+            if(params.registered !== undefined && params.registered === 'true') {
+                this.infoMessage = 'Registration Successful! Please Login!';
+            }
+          });
+    }
 
   
   submitFormHandler(formValue: { username: string, password: string }): void {
