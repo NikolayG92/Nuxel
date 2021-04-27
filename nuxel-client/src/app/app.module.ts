@@ -12,12 +12,12 @@ import { UserModule } from './user/user.module';
 import { TokenInterceptor } from './core/auth/token.interceptor';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AdModule } from './ad/ad.module';
+
 import { AboutModule } from './about/about.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CategoryListComponent } from './category/category-list/category-list.component';
 import { CategoryComponent } from './category/category/category.component';
 import { CategoryModule } from './category/category.module';
-
 export function tokenGetter() {
   return localStorage.getItem('JWT_TOKEN');
 }
