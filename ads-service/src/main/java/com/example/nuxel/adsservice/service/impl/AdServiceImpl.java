@@ -71,7 +71,7 @@ public class AdServiceImpl implements AdService {
     @Transactional
     @Override
     public List<AdServiceModel> getAllAdsByCategory(String id) {
-        return  this.adRepository.findAllByCategoryId(id).stream()
+             return this.adRepository.findAllByCategoryId(id).stream()
                 .map(c -> this.modelMapper.map(c, AdServiceModel.class))
                 .collect(Collectors.toList());
     }

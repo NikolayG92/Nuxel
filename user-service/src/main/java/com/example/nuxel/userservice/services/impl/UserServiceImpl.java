@@ -104,13 +104,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setProfileDetails(new ProfileDetails());
         user.setRegisteredOn(LocalDateTime.now());
-<<<<<<< HEAD
         user.getProfileDetails().setImageUrl("https://res.cloudinary.com/nuxel-application/image/upload/v1617252803/no-profile-img_pqxacn.png");
-        
-=======
         user.getProfileDetails().setImageUrl("https://res.cloudinary.com/nuxel-application/image/upload/v1618494650/blank-profile-picture-973460_1280_l0xqhh.webp");
 
->>>>>>> d286830f27b0cd866399c686b90aa91b9b4e0bf2
 
         this.userRepository.saveAndFlush(user);
 
@@ -182,6 +178,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
         return this.modelMapper.
                 map(user, UserServiceModel.class);
+    }
+
+    @Override
+    public UserServiceModel findUserById(String id) {
+        User user = this.userRepository.findById(id).orElse(null);
+        return this.modelMapper.map(user,UserServiceModel.class);
     }
 
     @Override

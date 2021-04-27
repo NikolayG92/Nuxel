@@ -87,6 +87,12 @@ public class UserController {
                 .build();
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity<UserServiceModel> getSellerById(@PathVariable("id") String id){
+        return ResponseEntity.
+                ok(this.userService.findUserById(id));
+    }
+
     @GetMapping("/getByEmail/{email}")
     public ResponseEntity<UserServiceModel> getUserByEmail(@PathVariable("email") String email){
 

@@ -2,13 +2,13 @@
 
 <div>
    <h1 class="ad-name"><span>{{ ad.name }}</span></h1>
-   <div class="container text-center" style="margin-right: -70px">
+   <div class="container text-center" style="margin-right: 40px">
     <div style="display: table-cell; justify-content:  space-around">
         <div class="row">
-            <div class="col">
-                <button (click)="changePhoto('-')" *ngIf="currentIndex > 0">-</button>
+            <div class="col ad-image">
+                <button (click)="changePhoto('-')" *ngIf="currentIndex > 0"><</button>
                 <img src= "{{currentImage.url}}">   
-                <button (click)="changePhoto('+')" *ngIf="currentIndex + 1 < ad.images.length && ad.images.length > 1">+</button>  
+                <button (click)="changePhoto('+')" *ngIf="currentIndex + 1 < ad.images.length && ad.images.length > 1">></button>  
             </div>
         </div>
         <div class="ad-date">
@@ -17,24 +17,35 @@
         <div>
             <h3 class="ad-price"><span>{{ ad.price | number }} $</span></h3>
         </div>
-        <div>
+        <!-- <div>
             <span><h5 class="text-left">Description :</h5>{{ad.description}}</span>
-        </div>    
+        </div>     -->
     </div>
     <div  style="display: table-cell">
         <div class="ad-seller">
             <h5>Seller :</h5>
             <div>
                 <div>
-                    
+                    <span>{{seller.profileDetails.firstName}} {{seller.profileDetails.lastName}}</span>
                 </div>
-               
+                
+                <img class="ad-seller-image" src= "{{seller.profileDetails.imageUrl}}"> 
+            </div>
+
+            <div>
+                <h6>Contact : </h6>
+                <span>{{ad.address.phoneNumber}}</span>
             </div>
         </div>
+      
+      
+        
+
+
         <div class="ad-location" > 
             <h5>Location : </h5>
             <div class="ad-info-div">
-                <span>{{ad.address.city}}, {{ad.address.region}}</span>
+                <span style="position: relative; left: 10px;">{{ad.address.city}}, {{ad.address.region}}</span>
             </div>
         </div>
     </div>

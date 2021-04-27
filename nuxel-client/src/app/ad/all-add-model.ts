@@ -6,6 +6,7 @@ export interface AllAdModel{
     address: any
     postCode: number,
     phoneNumber: String,
+    userId: String
     images: String[],
     category: any, 
 }

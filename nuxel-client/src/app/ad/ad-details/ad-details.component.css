@@ -12,18 +12,30 @@ img {
     margin-top: 10px;
 }
 
+.ad-image {
+    position: relative;
+    right: 253px;
+}
+
+.ad-seller-image{
+    width: 100px;
+    height: 100px;  
+    border-radius: 50%
+}
+
 .ad-name {
     text-align: center;
     font-weight:700;
 }
 
 .ad-date {
-    text-align: left;
+    position: relative;
+    right: 446px;  
 }
 
 .ad-price {
-    text-align: left;
-    font-weight:700;
+    position: relative;
+    right: 482px;
 }
 
 .ad-seller {
@@ -36,4 +48,5 @@ img {
 .ad-location {
     position: relative;
     left: 180px;    
+    bottom: 80px;
 }

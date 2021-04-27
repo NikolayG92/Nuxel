@@ -34,12 +34,16 @@ export class AdDetailsComponent implements OnInit {
       .subscribe(data => {
         this.ad = data;
         this.currentImage = data.images[this.currentIndex];
+        
+        this.UserService.getSellerById(data.userId)
+        .subscribe(data => {
+          this.seller = data;
+        })
       });
 
     }
     );
 
-    // this.seller = this.adService.;
   }
 
   changePhoto(direction: string){
