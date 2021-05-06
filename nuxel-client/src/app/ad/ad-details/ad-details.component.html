@@ -1,53 +1,37 @@
-
-
 <div>
-   <h1 class="ad-name"><span>{{ ad.name }}</span></h1>
-   <div class="container text-center" style="margin-right: 40px">
-    <div style="display: table-cell; justify-content:  space-around">
-        <div class="row">
-            <div class="col ad-image">
-                <button (click)="changePhoto('-')" *ngIf="currentIndex > 0"><</button>
-                <img src= "{{currentImage.url}}">   
-                <button (click)="changePhoto('+')" *ngIf="currentIndex + 1 < ad.images.length && ad.images.length > 1">></button>  
+    <section style="margin-top: 70px;">
+        <article>
+
+            <div class="ad-image">
+                <button (click)="changePhoto('-')" [disabled]="currentIndex === 0" disabled class="previous-photo"><i
+                        class="fas fa-arrow-left"></i></button>
+                <img src="{{currentImage.url}}">
+                <button (click)="changePhoto('+')"
+                    [disabled]="currentIndex + 1 === ad.images.length || ad.images.length === 1" class="next-photo"><i
+                        class="fas fa-arrow-right"></i></button>
             </div>
-        </div>
-        <div class="ad-date">
-            <h6>Added: {{ad.date | date }}</h6>
-        </div>
-        <div>
-            <h3 class="ad-price"><span>{{ ad.price | number }} $</span></h3>
-        </div>
-        <!-- <div>
-            <span><h5 class="text-left">Description :</h5>{{ad.description}}</span>
-        </div>     -->
-    </div>
-    <div  style="display: table-cell">
-        <div class="ad-seller">
-            <h5>Seller :</h5>
-            <div>
-                <div>
-                    <span>{{seller.profileDetails.firstName}} {{seller.profileDetails.lastName}}</span>
+             <div class="ad-info">
+                 <div>         
+                    <span class="added">Added: {{ad.date | date }}</span>
+                    <span>{{ ad.price | number }} $</span>
                 </div>
-                
-                <img class="ad-seller-image" src= "{{seller.profileDetails.imageUrl}}"> 
+            <div class="ad-description">
+                <span class="ad-name">{{ ad.name }}</span>
+                <span style="font-weight: 700;">Description: </span>
+                <span>{{ad.description}}</span>
             </div>
-
-            <div>
-                <h6>Contact : </h6>
-                <span>{{ad.address.phoneNumber}}</span>
             </div>
-        </div>
-      
-      
-        
-
-
-        <div class="ad-location" > 
+              
+        </article>
+        <article class="ad-seller">
+            <h5>Seller :</h5>
+            <span>{{seller.profileDetails.firstName}} {{seller.profileDetails.lastName}}</span>
+            <img class="ad-seller-image" src="{{seller.profileDetails.imageUrl}}">
+            <h6>Contact : </h6>
+            <span>{{ad.address.phoneNumber}}</span>
+            <button class="message-button" *ngIf="isLoggedIn()">Message</button>
             <h5>Location : </h5>
-            <div class="ad-info-div">
-                <span style="position: relative; left: 10px;">{{ad.address.city}}, {{ad.address.region}}</span>
-            </div>
-        </div>
-    </div>
-   </div>
+            <span style="position: relative; left: 10px;">{{ad.address.city}}, {{ad.address.region}}</span>
+        </article>
+    </section>
 </div>
