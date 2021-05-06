@@ -1,50 +1,24 @@
+.ad-article {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+}
+
+.ad-article img {
+    width: 200px;
+    height: 200px;
+}
+
 .ads-list {
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
-.ads-list > div {
-    width: 80%;
-}
-
-img { 
-    border-right: 1px solid;
-    margin-right: 20px;
-    width: 100px;
-    height: 100px;
-}
-
-tr {
-  
-    border: 1px solid;
-}
-
-.ad-name {
+.ad-details {
+    align-items: center;
     display: flex;
-    position: relative;
-    top: -35px;
-    left: -12px;
-}
-
-.ad-city {
-    position: relative;
-    top: 40px;
-    left: -60px;
-}
-
-.ad-region {
-    position: relative;
-    top: 40px;
-    left: -60px;
-}
-
-.ad-date { 
-    position: relative;
-    top: 40px;
-    left: 40px;
-}
-
-.ad-price {
-    position: relative;
-    top: -30px;
+    flex-direction: column;
+    background: white;
+    margin-bottom: 20px;
 }

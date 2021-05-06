@@ -45,7 +45,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/api/users/login", "/api/users/register", "/api/users/profile",
-                        "/api/users/getByEmail/*", "/api/users/getByUsername/*").permitAll()
+                        "/api/users/getByEmail/*", "/api/users/getByUsername/*", "/api/users/{id}").permitAll()
                 .mvcMatchers("/swagger-ui.html/**", "/swagger-resources/**", "/v2/api-docs", "/webjars/**").permitAll()
                 .anyRequest()
                 .authenticated()

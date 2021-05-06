@@ -22,7 +22,7 @@ export class AdDetailsComponent implements OnInit {
   constructor(private adService: AdService,
     private router: Router,
     private route: ActivatedRoute,
-    private UserService: UserService) { }
+    private userService: UserService) { }
 
   ngOnInit(): void {
 
@@ -35,7 +35,7 @@ export class AdDetailsComponent implements OnInit {
         this.ad = data;
         this.currentImage = data.images[this.currentIndex];
         
-        this.UserService.getSellerById(data.userId)
+        this.userService.getSellerById(data.userId)
         .subscribe(data => {
           this.seller = data;
         })
@@ -44,6 +44,11 @@ export class AdDetailsComponent implements OnInit {
     }
     );
 
+  }
+    
+
+  isLoggedIn() {
+    return this.userService.isLoggedIn();
   }
 
   changePhoto(direction: string){
