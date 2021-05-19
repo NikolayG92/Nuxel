@@ -9,5 +9,5 @@ export interface AllAdModel{
     phoneNumber: String,
     userId: String
     images: String[],
-    category: any, 
+    category: any
 }
