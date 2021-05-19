@@ -88,7 +88,7 @@ public class UserController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<UserServiceModel> getSellerById(@PathVariable("id") String id){
+    public ResponseEntity<UserServiceModel> getUserById(@PathVariable("id") String id){
         return ResponseEntity.
                 ok(this.userService.findUserById(id));
     }

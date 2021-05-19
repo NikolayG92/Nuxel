@@ -17,7 +17,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CategoryListComponent } from './category/category-list/category-list.component';
 import { CategoryComponent } from './category/category/category.component';
 import { CategoryModule } from './category/category.module';
+<<<<<<< HEAD
 import { ProfileManagementComponent } from './user/profile-management/profile-management.component';
+=======
+import { MessageModule } from './message/message.module';
+import { from } from 'rxjs';
+>>>>>>> 133b203170696e867d3272f7f44552b564f4c3f2
 
 export function tokenGetter() {
   return localStorage.getItem('JWT_TOKEN');
@@ -38,6 +43,7 @@ export function tokenGetter() {
     AdModule,
     AboutModule,
     CategoryModule,
+    MessageModule,
     HttpClientModule,
     JwtModule.forRoot({
       config: {

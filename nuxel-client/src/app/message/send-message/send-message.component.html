@@ -1,0 +1,29 @@
+<h2 class="text-center top border-bottom">Send message</h2>
+<section class="form-container" style="margin-bottom: 8px; background: white; color: black">
+    
+    <div class="message-form">
+        <span>{{seller.profileDetails.firstName}} {{seller.profileDetails.lastName}}</span>
+        <img src="{{seller.profileDetails.imageUrl}}">
+    </div>
+    
+    <form  [formGroup]="form" (ngSubmit)="submitHandler() ">
+
+        <div class="message-form">
+            <label for="description" class="text-slategray">Message</label>
+            <textarea [class.text-danger]="form.get('description').touched && !!form.get('description').errors"
+            formControlName="description"  type="text" id="description" placeholder="Enter your message here...">
+            </textarea>
+        </div>
+        <p *ngIf="form.get('description').touched && form.get('description').errors?.required" class="input-error">
+            Message is required!
+        </p>
+        <p *ngIf="form.get('description').touched && form.get('description').errors?.minlength" class="input-error">
+            Message must be at least 15 characters!
+        </p>
+        <p *ngIf="form.get('description').touched && form.get('description').errors?.maxlength" class="input-error">
+            Message cannot be more than 3000 characters!
+        </p>
+
+        <button [disabled]="form.invalid" type="submit" class="btn btn-primary btn-message">Send message</button>
+    </form>
+</section>

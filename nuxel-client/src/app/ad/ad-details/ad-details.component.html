@@ -1,7 +1,7 @@
 <div>
+    <span class="info-message" *ngIf="infoMessage">{{infoMessage}}</span>
     <section style="margin-top: 70px;">
         <article>
-
             <div class="ad-image">
                 <button (click)="changePhoto('-')" [disabled]="currentIndex === 0" disabled class="previous-photo"><i
                         class="fas fa-arrow-left"></i></button>
@@ -29,7 +29,7 @@
             <img class="ad-seller-image" src="{{seller.profileDetails.imageUrl}}">
             <h6>Contact : </h6>
             <span>{{ad.address.phoneNumber}}</span>
-            <button class="message-button" *ngIf="isLoggedIn()">Message</button>
+            <button  class="message-button"  [routerLink]="['/message/send-message',ad.id,seller.id,buyer.id]" *ngIf="isLoggedIn()">Message</button>
             <h5>Location : </h5>
             <span style="position: relative; left: 10px;">{{ad.address.city}}, {{ad.address.region}}</span>
         </article>
