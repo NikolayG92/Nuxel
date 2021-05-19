@@ -75,7 +75,7 @@ export class UserService {
   }
 
 
-  getSellerById(id: String){
+  getUserById(id: String){
     return this.http.get<UserModel>(`${this.apiUrl}/${id}`);
   }
 

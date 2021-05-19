@@ -22,13 +22,13 @@ import { AllAdModel } from "./all-add-model";
       return this.http.post<AdModel>(`${this.apiUrl}/add`, ad);
     }
 
-     adsByCategory(id: string){
-       return this.http.get<AllAdModel[]>(`${this.apiUrl}/allByCategory/${id}`)
-     }
+    adsByCategory(id: string){
+      return this.http.get<AllAdModel[]>(`${this.apiUrl}/allByCategory/${id}`)
+    }
 
-     getAdById(id: string){
-       return this.http.get<AllAdModel>(`${this.apiUrl}/details/${id}`);
-     }
+    getAdById(id: string){
+      return this.http.get<AllAdModel>(`${this.apiUrl}/details/${id}`);
+    }
 
   }
   

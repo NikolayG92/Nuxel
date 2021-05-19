@@ -18,6 +18,8 @@ export class AdDetailsComponent implements OnInit {
   currentImage;
   currentIndex = 0;
   seller: UserModel;
+  buyer: UserModel;
+  infoMessage = '';
 
   constructor(private adService: AdService,
     private router: Router,
@@ -35,15 +37,21 @@ export class AdDetailsComponent implements OnInit {
         this.ad = data;
         this.currentImage = data.images[this.currentIndex];
         
-        this.userService.getSellerById(data.userId)
+        this.userService.getUserById(data.userId)
         .subscribe(data => {
           this.seller = data;
         })
       });
 
-    }
-    );
+    })
+    this.buyer = this.userService.currentUser;
 
+    this.route.queryParams
+    .subscribe(params => {
+      if(params.createMessage !== undefined && params.createMessage === 'true') {
+          this.infoMessage = 'You sent message succesfully!';
+      }
+    });
   }
     
 

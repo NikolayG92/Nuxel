@@ -25,7 +25,7 @@ import { UserService } from "../user/user.service";
 
     getById(id : string) : Observable<any> {
       return this.http.get<CategoryModel>(`${this.apiUrl}/${id}`);
-  }
+    }
 
 
   }

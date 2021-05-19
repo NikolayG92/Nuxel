@@ -1,4 +1,5 @@
 export interface AllAdModel{
+    id: string,
     name: String,
     description: String,
     price: number,

@@ -17,6 +17,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CategoryListComponent } from './category/category-list/category-list.component';
 import { CategoryComponent } from './category/category/category.component';
 import { CategoryModule } from './category/category.module';
+import { MessageModule } from './message/message.module';
+import { from } from 'rxjs';
 
 export function tokenGetter() {
   return localStorage.getItem('JWT_TOKEN');
@@ -37,6 +39,7 @@ export function tokenGetter() {
     AdModule,
     AboutModule,
     CategoryModule,
+    MessageModule,
     HttpClientModule,
     JwtModule.forRoot({
       config: {
