@@ -119,4 +119,6 @@ public class AdServiceImpl implements AdService {
         ad.getMessages().add(currentMassageId);
         this.adRepository.save(ad);
     }
+    
 }
+
