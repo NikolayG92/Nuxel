@@ -1,6 +1,7 @@
 package com.example.nuxel.adsservice.service.impl;
 
 import com.example.nuxel.adsservice.model.bindingModels.AdAddBindingModel;
+import com.example.nuxel.adsservice.model.bindingModels.EditAdBindingModel;
 import com.example.nuxel.adsservice.model.entities.Ad;
 import com.example.nuxel.adsservice.model.entities.Address;
 import com.example.nuxel.adsservice.model.entities.Category;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.Table;
 import javax.transaction.Transactional;
 import java.io.IOException;
@@ -80,6 +82,36 @@ public class AdServiceImpl implements AdService {
     @Override
     public AdServiceModel getById(String id) {
         Ad ad = this.adRepository.findById(id).orElse(null);
+        return this.modelMapper.map(ad, AdServiceModel.class);
+    }
+
+    @Transactional
+    @Override
+    public List<AdServiceModel> getAllAdsByUser(String id) {
+        return this.adRepository.findAllByUserId(id).stream()
+                .map(c -> this.modelMapper.map(c, AdServiceModel.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public AdServiceModel editAd(EditAdBindingModel ad, MultipartFile[] files) throws IOException {
+        Ad currentAd = this.adRepository.findById(ad.getAdId()).orElseThrow(() ->
+                new EntityNotFoundException("Ad with that id is not found!"));
+
+        currentAd.setDescription(ad.getDescription());
+        List<Image> images = new ArrayList<>();
+        for (MultipartFile adImage : files) {
+            String imageUrl = adImage.isEmpty() ? "https://res.cloudinary.com/nuxel-application/image/upload/v1616937887/No-image-found_vtfx1x_ggyqam.jpg"
+                    : this.cloudinaryService.uploadImageToCurrentFolder(adImage, "products");
+            Image image = new Image();
+            image.setUrl(imageUrl);
+            images.add(image);
+        }
+        currentAd.setImages(images);
+
+        currentAd.setPrice(ad.getPrice());
+        this.adRepository.saveAndFlush(currentAd);
+
         return this.modelMapper.map(ad, AdServiceModel.class);
     }
 }

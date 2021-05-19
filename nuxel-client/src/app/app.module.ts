@@ -17,6 +17,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CategoryListComponent } from './category/category-list/category-list.component';
 import { CategoryComponent } from './category/category/category.component';
 import { CategoryModule } from './category/category.module';
+import { ProfileManagementComponent } from './user/profile-management/profile-management.component';
 
 export function tokenGetter() {
   return localStorage.getItem('JWT_TOKEN');
@@ -55,7 +56,8 @@ export function tokenGetter() {
   bootstrap: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ProfileManagementComponent
   ]
 })
 export class AppModule { }

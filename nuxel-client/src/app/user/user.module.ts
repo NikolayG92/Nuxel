@@ -29,6 +29,9 @@ import { ProfileManagementComponent } from './profile-management/profile-managem
   ],
   providers: [
     UserService
+  ],
+  exports: [
+    ProfileManagementComponent
   ]
 })
 export class UserModule { }

@@ -6,16 +6,20 @@ import { AdService } from './ad.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdsByCategoryComponent } from './ads-by-category/ads-by-category.component';
 import { AdDetailsComponent } from './ad-details/ad-details.component';
+import { AdsByUserComponent } from './ads-by-user/ads-by-user.component';
+import { UserModule } from '../user/user.module';
+import { EditAdComponent } from './edit-ad/edit-ad.component';
 
 
 
 @NgModule({
-  declarations: [AddAdComponent, AdsByCategoryComponent, AdDetailsComponent],
+  declarations: [AddAdComponent, AdsByCategoryComponent, AdDetailsComponent, AdsByUserComponent, EditAdComponent],
   imports: [
     CommonModule,
     AdRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    UserModule
   ],
   providers: [
     AdService

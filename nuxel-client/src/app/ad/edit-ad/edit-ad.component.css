@@ -1,0 +1,25 @@
+.ad-details {
+    display: flex;
+}
+
+.ad-edit-form {
+    min-width: 600px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    display: flex;
+    font-family: sans-serif;
+    border-bottom: 1px solid black;
+    width: 70%;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 90px;
+}
+
+form {
+    margin-top: 50px;
+}
