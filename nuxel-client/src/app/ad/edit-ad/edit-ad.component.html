@@ -1,0 +1,61 @@
+<section class="ad-details">
+    <app-profile-management></app-profile-management>
+    <div class="ad-edit-form">
+        <h1 class="text-center text-dark">{{ad.name}}</h1>
+        <form [formGroup]="form"  class="form mx-auto" (ngSubmit)="submitHandler()">
+            <div class="form-group">
+                <label for="description" class="font-weight-bold">Description</label>
+                <input [class.text-danger]="form.get('description').touched && !!form.get('description').errors" [(ngModel)]="ad.description" type="text" class="form-control" id="description"
+                       formControlName="description">
+            
+            </div>
+            <p *ngIf="form.get('description').touched && form.get('description').errors?.required" class="input-error">
+                Description is required!
+            </p>
+            <p *ngIf="form.get('description').touched && form.get('description').errors?.minlength" class="input-error">
+                Description must be at least 15 characters!
+            </p>
+            <p *ngIf="form.get('description').touched && form.get('description').errors?.maxlength" class="input-error">
+                Description cannot be more than 6000 characters!
+            </p>
+            <div class="form-group">
+                <label for="add-product-price" class="font-weight-bold">Price</label>
+                <input [class.text-danger]="form.get('price').touched && !!form.get('price').errors" type="number" 
+                min="0.01" step="any" [(ngModel)]="ad.price" class="form-control" id="add-product-price" name="price" formControlName="price">
+             
+            </div>
+            <p *ngIf="form.get('price').touched && form.get('price').errors?.required" class="input-error">
+                Price is required!
+            </p>
+            <p *ngIf="form.get('price').touched && form.get('price').errors?.min" class="input-error">
+                Please enter valid price!
+            </p>
+            <div class="form-group">
+
+                <label for="images">Images</label>        
+                <input formControlName="images" id="images" type="file" class="form-control" multiple="" 
+                (change)="onFileChange($event)">
+        
+                <div *ngIf="form.get('images').touched && form.get('images').invalid" class="alert alert-danger">
+                    <div *ngIf="form.get('images').errors?.required">Images are required.</div>       
+                </div>
+        
+            </div>
+            <div style="display: flex;">
+           
+            <div id="images" formArrayName="images" *ngFor='let url of images; let i = index;'>
+                <div>
+                    <a (click)="removeSelectedFile(i)">
+                        <i style="color: red; position: relative; left: 82px; top: -25px; cursor: pointer;"
+                        class="fas fa-trash-alt"></i></a> 
+                    <img [src]="url" height="80" width="80" style="margin: 3px;">
+                </div>  
+             
+            </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</section>
+

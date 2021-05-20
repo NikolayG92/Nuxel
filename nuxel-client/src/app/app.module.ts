@@ -12,11 +12,13 @@ import { UserModule } from './user/user.module';
 import { TokenInterceptor } from './core/auth/token.interceptor';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AdModule } from './ad/ad.module';
+
 import { AboutModule } from './about/about.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CategoryListComponent } from './category/category-list/category-list.component';
 import { CategoryComponent } from './category/category/category.component';
 import { CategoryModule } from './category/category.module';
+import { ProfileManagementComponent } from './user/profile-management/profile-management.component';
 import { MessageModule } from './message/message.module';
 import { from } from 'rxjs';
 
@@ -58,7 +60,8 @@ export function tokenGetter() {
   bootstrap: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ProfileManagementComponent
   ]
 })
 export class AppModule { }

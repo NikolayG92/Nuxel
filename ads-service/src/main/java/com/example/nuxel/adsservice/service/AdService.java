@@ -1,6 +1,7 @@
 package com.example.nuxel.adsservice.service;
 
 import com.example.nuxel.adsservice.model.bindingModels.AdAddBindingModel;
+import com.example.nuxel.adsservice.model.bindingModels.EditAdBindingModel;
 import com.example.nuxel.adsservice.model.entities.Ad;
 import com.example.nuxel.adsservice.service.serviceModels.AdServiceModel;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,4 +17,8 @@ public interface AdService {
     List<AdServiceModel> getAllAdsByCategory(String category);
 
     AdServiceModel getById(String id);
+
+    List<AdServiceModel> getAllAdsByUser(String id);
+
+    AdServiceModel editAd(EditAdBindingModel ad, MultipartFile[] files) throws IOException;
 }

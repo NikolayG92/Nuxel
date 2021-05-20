@@ -1,5 +1,5 @@
 export interface AllAdModel{
-    id: string,
+    id: String,
     name: String,
     description: String,
     price: number,
@@ -9,5 +9,5 @@ export interface AllAdModel{
     phoneNumber: String,
     userId: String
     images: String[],
-    category: any, 
+    category: any
 }

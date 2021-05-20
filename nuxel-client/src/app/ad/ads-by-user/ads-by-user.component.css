@@ -1,0 +1,55 @@
+.my-ads {
+    display: flex;
+}
+
+.ad-details {
+    border: 1px solid;
+    display: flex;
+}
+
+.ads-list {
+    margin-top: 100px;
+}
+
+h1 {
+    display: flex;
+    font-family: sans-serif;
+    border-bottom: 1px solid black;
+    width: 70%;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 90px;
+}
+
+.ad-article:nth-child(even){
+    background:lightslategray;
+    color: white;
+}
+
+.ad-name {
+    margin-left: 20px;
+}
+
+span {
+    margin-right: 20px;
+    font-family: sans-serif;
+}
+
+.edit-btn {
+    border: none;
+    background: chocolate;
+    color: white;
+    border-radius: 12px;
+    width: 60px;
+    margin-right: 20px;
+}
+
+.messages {
+    margin-right: 20px;
+    border: none;
+    background: cornflowerblue;
+    color: white;
+    border-radius: 12px;
+    height: 29px;
+}

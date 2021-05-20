@@ -9,6 +9,6 @@
     <button routerLink="/user/profile">About me</button>
     <button routerLink="/user/changePassword">Change password</button>
     <button routerLink="/user/profileDetails">Profile Details</button>
-    <button routerLink="/user/myAds">My Ads</button>
+    <button [routerLink]="['/ad', 'byUser', id]">My Ads</button>
     <button routerLink="/user/messages">Messages</button>
 </article>

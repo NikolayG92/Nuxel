@@ -1,6 +1,7 @@
 package com.example.nuxel.adsservice.web;
 
 import com.example.nuxel.adsservice.model.bindingModels.AdAddBindingModel;
+import com.example.nuxel.adsservice.model.bindingModels.EditAdBindingModel;
 import com.example.nuxel.adsservice.model.entities.Ad;
 import com.example.nuxel.adsservice.service.AdService;
 import com.example.nuxel.adsservice.service.serviceModels.AdServiceModel;
@@ -35,8 +36,19 @@ public class AdController{
 
     }
 
+    @PostMapping(value = "/editAdd",
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<AdServiceModel> editAdd(@RequestPart("ad") @Valid EditAdBindingModel ad,
+                                    @RequestPart("files") @Valid MultipartFile[] files)
+            throws IOException {
+        ad.setFiles(files);
+        return ResponseEntity.ok(adService.editAd(ad, files));
+
+    }
+
     @GetMapping("/allByCategory/{id}")
-    public ResponseEntity<List<AdServiceModel>> getAllUsers(@PathVariable("id") String id){
+    public ResponseEntity<List<AdServiceModel>> getAllAds(@PathVariable("id") String id){
         List<AdServiceModel> allAdsByCategory = this.adService.getAllAdsByCategory(id);
         return ResponseEntity
                 .ok()
@@ -47,6 +59,15 @@ public class AdController{
     public ResponseEntity<AdServiceModel> getById(@PathVariable("id") String id){
 
         return ResponseEntity.ok(this.adService.getById(id));
+    }
+
+    @GetMapping("/getAdsByUser/{id}")
+    public ResponseEntity<List<AdServiceModel>> getAdsByUser(@PathVariable("id") String id){
+        List<AdServiceModel> adsByUser = this.adService.getAllAdsByUser(id);
+
+        return ResponseEntity
+                .ok()
+                .body(adsByUser);
     }
 
 }

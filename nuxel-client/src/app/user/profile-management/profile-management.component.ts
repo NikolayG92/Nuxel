@@ -18,6 +18,7 @@ export class ProfileManagementComponent implements OnInit {
   imageUrl: any;
   form: FormBuilder;
   currentUser: any | null;
+  id: '';
 
   constructor(private userService: UserService,
     private router: Router) { }
@@ -25,6 +26,7 @@ export class ProfileManagementComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.userService.currentUser;
     this.image = this.currentUser.profileDetails.imageUrl;
+    this.id = this.currentUser.id;
   }
 
  onImageSelected(event) {
