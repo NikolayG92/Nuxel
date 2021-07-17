@@ -10,5 +10,5 @@
     <button routerLink="/user/changePassword">Change password</button>
     <button routerLink="/user/profileDetails">Profile Details</button>
     <button [routerLink]="['/ad', 'byUser', id]">My Ads</button>
-    <button routerLink="/user/messages">Messages</button>
+    <button [routerLink]="['/messages', 'byBuyer', id]">Messages</button>
 </article>

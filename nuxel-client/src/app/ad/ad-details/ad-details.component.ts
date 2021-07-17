@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { MessageModule } from 'src/app/message/message.module';
+import { MessageService } from 'src/app/message/message.service';
 import { UserModel } from 'src/app/user/user-model';
 import { UserService } from 'src/app/user/user.service';
 import { environment } from 'src/environments/environment';
@@ -20,13 +22,18 @@ export class AdDetailsComponent implements OnInit {
   seller: UserModel;
   buyer: UserModel;
   infoMessage = '';
+  currentUser: any | null;
+  conversation: any | null;
 
   constructor(private adService: AdService,
     private router: Router,
     private route: ActivatedRoute,
-    private userService: UserService) { }
+    private userService: UserService,
+    private messageService: MessageService) { }
 
   ngOnInit(): void {
+
+    this.currentUser = this.userService.currentUser;
 
     this.route.params.subscribe(params => {
 
@@ -44,19 +51,36 @@ export class AdDetailsComponent implements OnInit {
       });
 
     })
-    this.buyer = this.userService.currentUser;
+    this.buyer = this.currentUser;
 
     this.route.queryParams
     .subscribe(params => {
       if(params.createMessage !== undefined && params.createMessage === 'true') {
-          this.infoMessage = 'You sent message succesfully!';
+          this.infoMessage = 'You sent message successfully!';
       }
     });
+    this.hasConversation();
   }
     
 
   isLoggedIn() {
     return this.userService.isLoggedIn();
+  }
+
+  hasConversation(){
+    
+    this.messageService.getConversationsByUserId(this.currentUser.id)
+    .subscribe(data => {
+      data.forEach(conv => {
+        if(conv.adId === this.ad.id){
+     
+        if(conv.buyerId === this.currentUser.id){
+          this.conversation = conv;
+        }
+      }
+      })
+           
+    });
   }
 
   changePhoto(direction: string){

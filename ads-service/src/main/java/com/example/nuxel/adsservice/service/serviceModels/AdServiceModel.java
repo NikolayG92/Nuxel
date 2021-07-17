@@ -22,6 +22,5 @@ public class AdServiceModel extends BaseServiceModel {
     private Address address;
     private Category category;
     private String userId;
-    private List<Message> messages;
     private List<ImageServiceModel> images;
 }

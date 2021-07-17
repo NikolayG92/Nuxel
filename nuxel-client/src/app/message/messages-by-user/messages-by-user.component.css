@@ -1,0 +1,67 @@
+h1 {   
+    display: flex;
+    font-family: sans-serif;
+    border-bottom: 1px solid black;
+    width: 70%;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 90px;
+}
+
+.message-list {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+.ad-img {
+    height: 100px;
+    width: 130px;
+}
+
+.ad-name {
+    max-width: 50px;
+}
+
+.message-article {
+    border-top: 1px solid;
+    width: 120%;
+}
+
+.message-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    border-bottom: 1px solid; 
+    border-right: 1px solid;
+}
+
+.message-article:nth-child(odd) span {
+    color: white;
+}
+
+.message-article:nth-child(odd){
+    background: lightslategray;
+}
+
+.delete-btn {
+    margin-right: 10px;
+    border: none;
+    background: darkred;
+    color: white;
+    border-radius: 12px;
+    width: 80px;
+    height: 30px;
+    font-family: serif;
+    font-size: large;
+}
+
+.titles {
+    display: flex;
+    justify-content: space-around;
+    font-weight: 600px;
+    font-family: monospace;
+    color: cornflowerblue;
+}
+

@@ -1,5 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../core/guards/auth.guard';
+import { MessagesByUserComponent } from '../message/messages-by-user/messages-by-user.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileDetailsComponent } from './profile-details/profile-details.component';
