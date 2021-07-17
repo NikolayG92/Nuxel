@@ -114,10 +114,5 @@ public class AdServiceImpl implements AdService {
         return this.modelMapper.map(ad, AdServiceModel.class);
     }
 
-    public void addMessageToAd(String adId, Message currentMassageId) {
-        Ad ad = this.adRepository.findById(adId).orElse(null);
-        ad.getMessages().add(currentMassageId);
-        this.adRepository.save(ad);
-    }
 }
 

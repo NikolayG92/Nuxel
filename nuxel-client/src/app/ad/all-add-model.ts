@@ -1,3 +1,5 @@
+import { ConversationModel } from "../message/conversation-model";
+
 export interface AllAdModel{
     id: String,
     name: String,
@@ -9,5 +11,6 @@ export interface AllAdModel{
     phoneNumber: String,
     userId: String
     images: String[],
-    category: any
+    category: any,
+    conversations: ConversationModel[]
 }

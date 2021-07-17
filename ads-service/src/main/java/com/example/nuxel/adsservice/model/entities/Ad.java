@@ -31,10 +31,9 @@ public class Ad extends BaseEntity{
     @ManyToOne
     private Category category;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Message> messages = new ArrayList<>();
-
     @OneToMany(cascade = CascadeType.ALL)
     private List<Image> images;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Conversation> conversations = new ArrayList<>();
 }
