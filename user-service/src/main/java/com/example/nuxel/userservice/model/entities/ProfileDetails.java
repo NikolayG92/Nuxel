@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "profile_details")
@@ -27,4 +28,8 @@ public class ProfileDetails extends BaseEntity{
     @Column(name = "gender")
     @Enumerated(EnumType.STRING)
     private Gender gender;
+    @Column
+    private Double rating = 0.0;
+    @OneToMany(fetch = FetchType.EAGER)
+    List<Review> reviews;
 }

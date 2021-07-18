@@ -56,6 +56,10 @@ export class UserService {
   changeProfileDetails(user: FormData): Observable<any> {
     return this.http.post(`${this.apiUrl}/changeProfileDetails`, user);
   }
+
+  rateSeller(ratingModel: {rating: Number,sellerId: String,buyerId: String}){
+    return this.http.post(`${this.apiUrl}/rateUser`, ratingModel);
+  }
   
   logout() {
     this.isLoggedIn$.next(false);

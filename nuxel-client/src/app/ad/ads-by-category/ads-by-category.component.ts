@@ -1,7 +1,6 @@
 import { HttpParams } from '@angular/common/http';
 import { Component, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
 import { CategoryModel } from 'src/app/category/category-model';
 import { CategoryService } from 'src/app/category/category.service';
 import { AllAdModel } from '../all-add-model';
@@ -32,8 +31,7 @@ export class AdsByCategoryComponent implements OnInit {
       this.categoryService.getById(id)
       .subscribe(data => {
         this.category = data
-      }
-      );
+      });
       
       this.adService.adsByCategory(id)
       .subscribe(data => {

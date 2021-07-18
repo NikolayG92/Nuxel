@@ -1,0 +1,15 @@
+.search-button  {
+    top: 7px;
+    height: 35px;
+    border-radius: 2px;
+    background-color: silver;
+    position: absolute;
+    right: 337px;
+    border-color: black;
+}
+
+.search-bar {
+    height: 32px;
+    width: 300px;
+}
+

@@ -19,13 +19,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.EntityNotFoundException;
-import javax.persistence.Table;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 @Service
@@ -79,6 +80,15 @@ public class AdServiceImpl implements AdService {
     }
 
     @Override
+    public List<AdServiceModel> getAllAdsByWord(String word) {
+
+        return this.adRepository.findAll().stream()
+                .filter(a -> a.getName().toLowerCase().contains(word.toLowerCase()))
+                .map(a -> this.modelMapper.map(a, AdServiceModel.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public AdServiceModel getById(String id) {
         Ad ad = this.adRepository.findById(id).orElse(null);
         return this.modelMapper.map(ad, AdServiceModel.class);
@@ -112,6 +122,12 @@ public class AdServiceImpl implements AdService {
         this.adRepository.saveAndFlush(currentAd);
 
         return this.modelMapper.map(ad, AdServiceModel.class);
+    }
+
+    @Override
+    public void removeAd(String id) {
+        Ad ad = Objects.requireNonNull(this.adRepository.findById(id).orElse(null));
+        this.adRepository.delete(ad);
     }
 
     public void addMessageToAd(String adId, Message currentMassageId) {

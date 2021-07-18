@@ -1,5 +1,4 @@
 import { Component, OnInit , Input } from '@angular/core';
-import { from } from 'rxjs';
 import { CategoryModel } from 'src/app/category/category-model';
 import {CategoryService} from 'src/app/category/category.service';
 

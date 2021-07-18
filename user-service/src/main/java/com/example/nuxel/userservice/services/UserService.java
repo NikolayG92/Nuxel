@@ -3,9 +3,9 @@ package com.example.nuxel.userservice.services;
 import com.example.nuxel.userservice.exceptions.PasswordDoNotMatchException;
 import com.example.nuxel.userservice.exceptions.UserNotFoundException;
 import com.example.nuxel.userservice.model.bindingModels.LoginBindingModel;
+import com.example.nuxel.userservice.model.bindingModels.ReviewBindingModel;
 import com.example.nuxel.userservice.model.bindingModels.UserEditBindingModel;
 import com.example.nuxel.userservice.model.bindingModels.UserRegisterBindingModel;
-import com.example.nuxel.userservice.model.entities.User;
 import com.example.nuxel.userservice.model.view.LoginViewModel;
 import com.example.nuxel.userservice.model.view.RegisterViewModel;
 import com.example.nuxel.userservice.services.serviceModels.UserServiceModel;
@@ -34,4 +34,6 @@ public interface UserService extends UserDetailsService {
     UserServiceModel changeProfileDetails(UserEditBindingModel userEditBindingModel, String name) throws UserNotFoundException;
 
     UserServiceModel findUserById(String id);
+
+    Double rateUser(ReviewBindingModel ratingBindingModel);
 }

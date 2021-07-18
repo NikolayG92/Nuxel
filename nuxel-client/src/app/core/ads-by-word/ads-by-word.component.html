@@ -1,0 +1,25 @@
+<div *ngIf = "adsByWord.length !== 0">
+        <h2 class="ads-name">Ads</h2>
+        <table class="table" *ngFor="let ad of adsByWord;" class="ad-article">
+          <div *ngFor="let image of ad.images; let i=index">
+            <div *ngIf="i < 1" class="ad-details">
+              <a routerLink="/ad/details/{{ad.id}}">
+              <img class = "image"   [src]= "image.url">
+            </a>
+            </div>
+          </div>
+          <td >
+            <span class="product-name">{{ ad.name }}</span>
+          </td>
+          <td >
+            <span class="product-address">{{ad.address.city}}, {{ad.address.region}} - {{ad.date | date }}</span>
+          </td>
+          <td>
+            <span class="product-price">{{ ad.price | number }}$</span>
+          </td>
+        </table>
+</div>
+
+<div *ngIf = "adsByWord.length === 0">
+ <h3 class="not-found">Product not found!</h3>
+</div>

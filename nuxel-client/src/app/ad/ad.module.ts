@@ -9,6 +9,7 @@ import { AdDetailsComponent } from './ad-details/ad-details.component';
 import { AdsByUserComponent } from './ads-by-user/ads-by-user.component';
 import { UserModule } from '../user/user.module';
 import { EditAdComponent } from './edit-ad/edit-ad.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -19,7 +20,8 @@ import { EditAdComponent } from './edit-ad/edit-ad.component';
     AdRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    UserModule
+    UserModule,
+    NgbModule
   ],
   providers: [
     AdService

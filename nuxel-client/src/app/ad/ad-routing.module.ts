@@ -1,4 +1,5 @@
 import { RouterModule, Routes } from '@angular/router';
+import { AdsByWordComponent } from '../core/ads-by-word/ads-by-word.component';
 import { AuthGuard } from '../core/guards/auth.guard';
 import { AdDetailsComponent } from './ad-details/ad-details.component';
 import { AddAdComponent } from './add-ad/add-ad.component';
@@ -31,6 +32,10 @@ const routes: Routes = [
       {
         path: 'edit/:id',
         component: EditAdComponent
+      },
+      {
+        path: 'ads-by-word/:word',
+        component: AdsByWordComponent
       }
     ]
   }

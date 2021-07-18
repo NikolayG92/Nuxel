@@ -47,12 +47,28 @@ public class AdController{
 
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> removeAd (@PathVariable("id") String id) {
+        adService.removeAd(id);
+        return ResponseEntity
+                .ok()
+                .build();
+    }
+
     @GetMapping("/allByCategory/{id}")
     public ResponseEntity<List<AdServiceModel>> getAllAds(@PathVariable("id") String id){
         List<AdServiceModel> allAdsByCategory = this.adService.getAllAdsByCategory(id);
         return ResponseEntity
                 .ok()
                 .body(allAdsByCategory);
+    }
+
+    @GetMapping("/allByWord/{word}")
+    public ResponseEntity<List<AdServiceModel>> getAllAdsByWord(@PathVariable("word") String word){
+        List<AdServiceModel> allAdsByWord = this.adService.getAllAdsByWord(word);
+        return ResponseEntity
+                .ok()
+                .body(allAdsByWord);
     }
 
     @GetMapping("/details/{id}")

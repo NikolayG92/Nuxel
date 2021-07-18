@@ -20,7 +20,9 @@ import { CategoryComponent } from './category/category/category.component';
 import { CategoryModule } from './category/category.module';
 import { ProfileManagementComponent } from './user/profile-management/profile-management.component';
 import { MessageModule } from './message/message.module';
-import { from } from 'rxjs';
+import { BnNgIdleService } from 'bn-ng-idle';
+
+
 
 export function tokenGetter() {
   return localStorage.getItem('JWT_TOKEN');
@@ -47,15 +49,16 @@ export function tokenGetter() {
       config: {
         tokenGetter
       }
-    })
+    }),
+    NgbModule,
     ],
   providers: [
+    BnNgIdleService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
-    }
-
+    },
   ],
   bootstrap: [
     AppComponent,

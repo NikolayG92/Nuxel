@@ -4,16 +4,18 @@ import com.example.nuxel.userservice.config.jwt.JwtUtils;
 import com.example.nuxel.userservice.exceptions.PasswordDoNotMatchException;
 import com.example.nuxel.userservice.exceptions.UserNotFoundException;
 import com.example.nuxel.userservice.model.bindingModels.LoginBindingModel;
+import com.example.nuxel.userservice.model.bindingModels.ReviewBindingModel;
 import com.example.nuxel.userservice.model.bindingModels.UserEditBindingModel;
 import com.example.nuxel.userservice.model.bindingModels.UserRegisterBindingModel;
 import com.example.nuxel.userservice.model.entities.Gender;
 import com.example.nuxel.userservice.model.entities.ProfileDetails;
+import com.example.nuxel.userservice.model.entities.Review;
 import com.example.nuxel.userservice.model.entities.User;
 import com.example.nuxel.userservice.model.view.LoginViewModel;
 import com.example.nuxel.userservice.model.view.RegisterViewModel;
-import com.example.nuxel.userservice.repositories.ProfileDetailsRepository;
 import com.example.nuxel.userservice.repositories.UserRepository;
 import com.example.nuxel.userservice.services.CloudinaryService;
+import com.example.nuxel.userservice.services.ReviewService;
 import com.example.nuxel.userservice.services.RoleService;
 import com.example.nuxel.userservice.services.UserService;
 import com.example.nuxel.userservice.services.serviceModels.ProfileDetailsServiceModel;
@@ -27,6 +29,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityExistsException;
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -44,16 +47,17 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final JwtUtils jwtUtils;
     private final CloudinaryService cloudinaryService;
-    private final ProfileDetailsRepository profileDetailsRepository;
+    private final ReviewService reviewService;
 
-    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, RoleService roleService, BCryptPasswordEncoder bCryptPasswordEncoder, JwtUtils jwtUtils, CloudinaryService cloudinaryService, ProfileDetailsRepository profileDetailsRepository) {
+    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, RoleService roleService, BCryptPasswordEncoder bCryptPasswordEncoder,
+                           JwtUtils jwtUtils, CloudinaryService cloudinaryService, ReviewService reviewService) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
         this.roleService = roleService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.jwtUtils = jwtUtils;
         this.cloudinaryService = cloudinaryService;
-        this.profileDetailsRepository = profileDetailsRepository;
+        this.reviewService = reviewService;
     }
 
     @Override
@@ -74,6 +78,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         UserServiceModel userServiceModel = this.modelMapper.map(user, UserServiceModel.class);
         ProfileDetailsServiceModel profileDetailsServiceModel = this.modelMapper
                 .map(user.getProfileDetails(), ProfileDetailsServiceModel.class);
+
         userServiceModel.setProfileDetails(profileDetailsServiceModel);
         return userServiceModel;
     }
@@ -187,11 +192,24 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    public Double rateUser(ReviewBindingModel ratingBindingModel) {
+        User user = userRepository.findById(ratingBindingModel.getSellerId()).orElse(null);
+        Review review = reviewService.addReview(ratingBindingModel);
+        Double rating = 0.0;
+        if(review != null){
+            user.getProfileDetails().getReviews().add(review);
+            rating = reviewService.rating(ratingBindingModel.getSellerId());
+            user.getProfileDetails().setRating(rating);
+            userRepository.save(user);
+        }
+        return rating;
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         return userRepository.findUserByUsername(username)
                 .orElseThrow
-                        (() ->
-                                new UsernameNotFoundException(String.format("%s user not found", username)));
+                        (() -> new UsernameNotFoundException(String.format("%s user not found", username)));
     }
 }

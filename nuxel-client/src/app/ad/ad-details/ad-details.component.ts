@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { UserModel } from 'src/app/user/user-model';
 import { UserService } from 'src/app/user/user.service';
-import { environment } from 'src/environments/environment';
-import { AdModel } from '../ad-add-model';
 import { AdService } from '../ad.service';
 import { AllAdModel } from '../all-add-model';
+import { RatingModel } from '../ratingModel';
 
 @Component({
   selector: 'app-ad-details',
@@ -19,12 +18,15 @@ export class AdDetailsComponent implements OnInit {
   currentIndex = 0;
   seller: UserModel;
   buyer: UserModel;
-  infoMessage = '';
-
+  ratingModel: RatingModel;
+  infoMessage = '';  
+  isRated;
+  reviews: any;
   constructor(private adService: AdService,
     private router: Router,
     private route: ActivatedRoute,
-    private userService: UserService) { }
+    private userService: UserService) {
+     }
 
   ngOnInit(): void {
 
@@ -40,12 +42,17 @@ export class AdDetailsComponent implements OnInit {
         this.userService.getUserById(data.userId)
         .subscribe(data => {
           this.seller = data;
+          this.reviews = this.seller.profileDetails.reviews;
+      this.reviews.forEach(review => {
+         if(review.buyerId == this.buyer.id){
+           this.isRated = true;
+         }
+      });
         })
       });
-
+      
     })
     this.buyer = this.userService.currentUser;
-
     this.route.queryParams
     .subscribe(params => {
       if(params.createMessage !== undefined && params.createMessage === 'true') {
@@ -53,7 +60,19 @@ export class AdDetailsComponent implements OnInit {
       }
     });
   }
-    
+  
+  userRate(userRating: Number,sellerId: String,buyerId: String){
+    this.ratingModel = new RatingModel();
+    this.ratingModel.rating = userRating;
+    this.ratingModel.sellerId = sellerId;
+    this.ratingModel.buyerId = buyerId;
+    const formData = this.ratingModel;
+  
+    this.userService.rateSeller(formData)
+    .subscribe(() => {
+      window.location.reload();
+    });
+  }
 
   isLoggedIn() {
     return this.userService.isLoggedIn();
@@ -64,7 +83,6 @@ export class AdDetailsComponent implements OnInit {
       this.currentIndex--;
     }else {
       this.currentIndex++;
-      
     }
     this.currentImage = this.ad.images[this.currentIndex];
   }

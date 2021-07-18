@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import java.time.LocalDate;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
@@ -20,4 +21,6 @@ public class ProfileDetailsServiceModel {
     private LocalDate dateOfBirth;
     private String phoneNumber;
     private Gender gender;
+    private Double rating;
+    private List<ReviewServiceModel> reviews;
 }

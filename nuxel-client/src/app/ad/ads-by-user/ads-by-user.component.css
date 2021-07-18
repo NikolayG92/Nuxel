@@ -38,7 +38,7 @@ span {
 
 .edit-btn {
     border: none;
-    background: chocolate;
+    background: green;
     color: white;
     border-radius: 12px;
     width: 60px;
@@ -51,5 +51,14 @@ span {
     background: cornflowerblue;
     color: white;
     border-radius: 12px;
-    height: 29px;
+    height: 26px;
+}
+
+.remove-btn {
+    border: none;
+    background: red;
+    color: white;
+    border-radius: 12px;
+    width: 70px;
+    margin-right: 20px;
 }

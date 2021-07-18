@@ -8,7 +8,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Set;
 
 public interface AdService {
 
@@ -16,9 +15,13 @@ public interface AdService {
 
     List<AdServiceModel> getAllAdsByCategory(String category);
 
+    List<AdServiceModel> getAllAdsByWord(String word);
+
     AdServiceModel getById(String id);
 
     List<AdServiceModel> getAllAdsByUser(String id);
 
     AdServiceModel editAd(EditAdBindingModel ad, MultipartFile[] files) throws IOException;
+
+    void removeAd(String adId);
 }

@@ -10,27 +10,42 @@
                     [disabled]="currentIndex + 1 === ad.images.length || ad.images.length === 1" class="next-photo"><i
                         class="fas fa-arrow-right"></i></button>
             </div>
-             <div class="ad-info">
-                 <div>         
+            <div class="ad-info">
+                <div>
                     <span class="added">Added: {{ad.date | date }}</span>
                     <span>{{ ad.price | number }} $</span>
                 </div>
-            <div class="ad-description">
-                <span class="ad-name">{{ ad.name }}</span>
-                <span style="font-weight: 700;">Description: </span>
-                <span>{{ad.description}}</span>
+                <div class="ad-description">
+                    <span class="ad-name">{{ ad.name }}</span>
+                    <span style="font-weight: 700;">Description: </span>
+                    <span>{{ad.description}}</span>
+                </div>
             </div>
-            </div>
-              
-            
+
         </article>
         <article class="ad-seller">
             <h5>Seller :</h5>
             <span>{{seller.profileDetails.firstName}} {{seller.profileDetails.lastName}}</span>
             <img class="ad-seller-image" src="{{seller.profileDetails.imageUrl}}">
+
+            <div *ngIf="!isRated">
+                <ngb-rating [max]="5">
+                    <ng-template let-fill="fill" let-index="index + 1">
+                        <span class="star" (click)="userRate(index,seller.id,buyer.id)" [class.filled]="fill === 100"
+                            [class.bad]="index < 3">&#9733;</span>
+                    </ng-template>
+                </ngb-rating>
+            </div>
+            <div *ngIf="isRated">
+                <ngb-rating class="star-rated" [readonly]="true" [(rate)]="seller.profileDetails.rating" max="5">  
+                </ngb-rating>
+            </div>
+            <h6>Rating : </h6>
+            <span>{{seller.profileDetails.rating.toFixed(1)}} ({{seller.profileDetails.reviews.length}})</span>
             <h6>Contact : </h6>
             <span>{{ad.address.phoneNumber}}</span>
-            <button  class="message-button"  [routerLink]="['/message/send-message',ad.id,seller.id,buyer.id]" *ngIf="isLoggedIn()">Message</button>
+            <button class="message-button" [routerLink]="['/message/send-message',ad.id,seller.id,buyer.id]"
+                *ngIf="isLoggedIn()">Message</button>
             <h5>Location : </h5>
             <span style="position: relative; left: 10px;">{{ad.address.city}}, {{ad.address.region}}</span>
         </article>

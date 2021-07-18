@@ -30,4 +30,12 @@ export class AdsByUserComponent implements OnInit {
      
   }
 
+  removeAd(id: string) {
+    this.adService.deleteAd(id).subscribe(
+      {
+        next: () => {this.router.navigate(['/'])}
+      }
+    );
+  }
+
 }

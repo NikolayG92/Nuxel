@@ -3,6 +3,7 @@ package com.example.nuxel.userservice.web.controllers;
 import com.example.nuxel.userservice.exceptions.PasswordDoNotMatchException;
 import com.example.nuxel.userservice.exceptions.UserNotFoundException;
 import com.example.nuxel.userservice.model.bindingModels.LoginBindingModel;
+import com.example.nuxel.userservice.model.bindingModels.ReviewBindingModel;
 import com.example.nuxel.userservice.model.bindingModels.UserEditBindingModel;
 import com.example.nuxel.userservice.model.bindingModels.UserRegisterBindingModel;
 import com.example.nuxel.userservice.model.view.LoginViewModel;
@@ -41,7 +42,7 @@ public class UserController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<Set<UserServiceModel>> getAllUsers(){
+    public ResponseEntity<Set<UserServiceModel>> getAllUsers() {
 
         return ResponseEntity
                 .ok()
@@ -49,7 +50,7 @@ public class UserController {
     }
 
     @GetMapping("/profile")
-    public ResponseEntity<UserServiceModel> getCurrentUser(Principal principal){
+    public ResponseEntity<UserServiceModel> getCurrentUser(Principal principal) {
 
         return ResponseEntity
                 .ok()
@@ -68,7 +69,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginViewModel> login(@Valid @RequestBody LoginBindingModel loginBindingModel ) throws UserNotFoundException {
+    public ResponseEntity<LoginViewModel> login(@Valid @RequestBody LoginBindingModel loginBindingModel) throws UserNotFoundException {
         this.authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(loginBindingModel.getUsername(),
                         loginBindingModel.getPassword()));
@@ -79,7 +80,7 @@ public class UserController {
     }
 
     @GetMapping("/logout")
-    public ResponseEntity<Void> logoutUser(HttpSession httpSession){
+    public ResponseEntity<Void> logoutUser(HttpSession httpSession) {
 
         httpSession.invalidate();
 
@@ -88,20 +89,20 @@ public class UserController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<UserServiceModel> getUserById(@PathVariable("id") String id){
+    public ResponseEntity<UserServiceModel> getUserById(@PathVariable("id") String id) {
         return ResponseEntity.
                 ok(this.userService.findUserById(id));
     }
 
     @GetMapping("/getByEmail/{email}")
-    public ResponseEntity<UserServiceModel> getUserByEmail(@PathVariable("email") String email){
+    public ResponseEntity<UserServiceModel> getUserByEmail(@PathVariable("email") String email) {
 
         return ResponseEntity
                 .ok(this.userService.findUserByEmail(email));
     }
 
     @GetMapping("/getByUsername/{username}")
-    public ResponseEntity<UserServiceModel> getUserByUsername(@PathVariable("username") String username){
+    public ResponseEntity<UserServiceModel> getUserByUsername(@PathVariable("username") String username) {
 
         return ResponseEntity
                 .ok(this.userService.findUserByUsername(username));
@@ -111,7 +112,7 @@ public class UserController {
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserServiceModel> changeProfilePicture(@RequestPart("file") @Valid MultipartFile file,
-                                                Principal principal) throws UserNotFoundException, IOException {
+                                                                 Principal principal) throws UserNotFoundException, IOException {
 
         return ResponseEntity
                 .ok()
@@ -128,10 +129,17 @@ public class UserController {
 
     @PostMapping("/changeProfileDetails")
     public ResponseEntity<UserServiceModel> changeProfileDetails(@Valid @RequestBody UserEditBindingModel userEditBindingModel,
-                                                           Principal principal) throws UserNotFoundException {
+                                                                 Principal principal) throws UserNotFoundException {
 
         return ResponseEntity.ok()
                 .body(this.userService.changeProfileDetails(userEditBindingModel, principal.getName()));
+    }
+
+    @PostMapping("/rateUser")
+    public ResponseEntity<Double> rateUser(@RequestBody ReviewBindingModel ratingBindingModel) {
+        return ResponseEntity
+                .ok()
+                .body(this.userService.rateUser(ratingBindingModel));
     }
 
 }
