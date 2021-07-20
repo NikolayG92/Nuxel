@@ -21,6 +21,7 @@ import { CategoryModule } from './category/category.module';
 import { ProfileManagementComponent } from './user/profile-management/profile-management.component';
 import { MessageModule } from './message/message.module';
 import { BnNgIdleService } from 'bn-ng-idle';
+import { FilterModule } from './filter/filter.module';
 
 
 
@@ -33,7 +34,7 @@ export function tokenGetter() {
     AppComponent,
     HomeComponent,
     CategoryListComponent,
-    CategoryComponent
+    CategoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +43,7 @@ export function tokenGetter() {
     UserModule,
     AdModule,
     AboutModule,
+    FilterModule,
     CategoryModule,
     MessageModule,
     HttpClientModule,

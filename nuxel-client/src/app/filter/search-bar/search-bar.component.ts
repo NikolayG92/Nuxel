@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import {AdService} from 'src/app/ad/ad.service';
-import { AllAdModel } from 'src/app/ad/all-add-model';
 
 
 @Component({

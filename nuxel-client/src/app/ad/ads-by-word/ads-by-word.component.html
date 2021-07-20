@@ -1,3 +1,5 @@
+
+
 <div *ngIf = "adsByWord.length !== 0">
         <h2 class="ads-name">Ads</h2>
         <table class="table" *ngFor="let ad of adsByWord;" class="ad-article">
@@ -21,5 +23,5 @@
 </div>
 
 <div *ngIf = "adsByWord.length === 0">
- <h3 class="not-found">Product not found!</h3>
+ <img class ="product-not-found-img" src="https://res.cloudinary.com/nuxel-application/image/upload/v1626596989/page_not_found_jpg_zfufhx.jpg">
 </div>
