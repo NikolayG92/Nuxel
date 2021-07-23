@@ -1,8 +1,9 @@
 
 <div class="container mt-5">
         <h2 class="text-center form-heading">Add Ad</h2>
+    
         <form [formGroup]="form"  class="form w-50 mx-auto" style="margin-bottom: 75px;" (ngSubmit)="submitHandler()">
-
+    
             <div class="form-group">
                 <label for="name" class="font-weight-bold">Ad heading</label>
                 <input [class.text-danger]="form.get('name').touched && !!form.get('name').errors" type="text" class="form-control" id="name"
@@ -23,6 +24,7 @@
                        placeholder="Enter content" formControlName="description">
             
             </div>
+
             <p *ngIf="form.get('description').touched && form.get('description').errors?.required" class="input-error">
                 Description is required!
             </p>

@@ -12,6 +12,7 @@ import { UserService } from '../user.service';
 export class ProfileManagementComponent implements OnInit {
 
   @Input() user: UserModel;
+  isLoading;
 
   image: '';
   selectedImage: File;
@@ -30,6 +31,7 @@ export class ProfileManagementComponent implements OnInit {
   }
 
  onImageSelected(event) {
+   this.isLoading = true;
    this.selectedImage = <File>event.target.files[0];
    const formData = new FormData;
    formData.append('file', this.selectedImage, this.selectedImage.name);
@@ -41,6 +43,7 @@ export class ProfileManagementComponent implements OnInit {
     next: () => {
       this.router.navigate(['/user/profile'])
       .then(() => {
+        this.isLoading = false;
         window.location.reload();
       });
     }});

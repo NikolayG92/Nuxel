@@ -14,13 +14,17 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { AdModule } from './ad/ad.module';
 
 import { AboutModule } from './about/about.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CategoryListComponent } from './category/category-list/category-list.component';
 import { CategoryComponent } from './category/category/category.component';
 import { CategoryModule } from './category/category.module';
 import { ProfileManagementComponent } from './user/profile-management/profile-management.component';
 import { MessageModule } from './message/message.module';
-import { from } from 'rxjs';
+
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoaderService } from './services/loader.service';
+import { LoaderInterceptor } from './interceptors/loader-interceptor.service';
+import { LoaderComponent } from './shared/loader/loader.component';
 
 export function tokenGetter() {
   return localStorage.getItem('JWT_TOKEN');
@@ -31,7 +35,8 @@ export function tokenGetter() {
     AppComponent,
     HomeComponent,
     CategoryListComponent,
-    CategoryComponent
+    CategoryComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -47,12 +52,20 @@ export function tokenGetter() {
       config: {
         tokenGetter
       }
-    })
+    }),
+    BrowserAnimationsModule,
+    MatProgressBarModule
     ],
   providers: [
+    LoaderService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptor,
       multi: true
     }
 

@@ -21,8 +21,6 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-
     this.route.queryParams
       .subscribe(params => {
         if(params.changed !== undefined && params.changed === 'true') {

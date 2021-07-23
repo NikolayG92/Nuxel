@@ -63,7 +63,7 @@ export class ConversationComponent implements OnInit {
 
     this.messageService.sendMessage(data).subscribe({
       next: () => {
-        window.location.reload();
+         window.location.reload();
       }
     });
 
