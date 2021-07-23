@@ -1,6 +1,5 @@
 <div >
       <h3 class="text-center text-dark">{{category.name}}</h3>
-   
         <section class="ads-list">
           <article *ngFor="let ad of adsByCategory;" class="ad-article">
             <div *ngFor="let image of ad.images; let i=index">

@@ -9,6 +9,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ProfileDetailsComponent } from './profile-details/profile-details.component';
 import { ProfileManagementComponent } from './profile-management/profile-management.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 

@@ -18,6 +18,7 @@ export class AdsByCategoryComponent implements OnInit {
   adsByCategory: AllAdModel[];
   category: CategoryModel;
   currentUser: any | null;
+  isLoading: false;
 
  
   constructor(private adService: AdService,

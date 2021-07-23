@@ -11,6 +11,7 @@ export class LoginComponent implements OnInit {
 
   errorMessage = '';
   infoMessage = '';
+
   constructor(private userService: UserService,
     private router: Router,
     private route: ActivatedRoute) { }
