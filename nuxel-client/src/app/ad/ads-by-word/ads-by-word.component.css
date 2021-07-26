@@ -15,13 +15,15 @@ table {
 }
 
 .ads-name {
-  position: relative;
+  position: absolute;
+  margin-top: -40px;
   left: 51px;
 }
 
 .product-name {
   position: absolute;
   left: 270px;
+  margin-top: -11px;
   font-size: 20px;
   font-weight: 500;
 }
@@ -29,7 +31,7 @@ table {
 .product-address {
   position: absolute;
   font-size: 13px;
-  margin-top: 174px;
+  margin-top: 167px;
   left: 270px;
   
 }

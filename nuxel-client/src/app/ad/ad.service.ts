@@ -19,7 +19,6 @@ export class AdService {
 
   }
 
-
   addAdd(ad: FormData) {
     return this.http.post<AdModel>(`${this.apiUrl}/add`, ad);
   }

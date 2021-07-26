@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AdService } from 'src/app/ad/ad.service';
 import { AllAdModel } from 'src/app/ad/all-add-model';
@@ -10,7 +10,7 @@ import { AllAdModel } from 'src/app/ad/all-add-model';
 })
 export class AdsByWordComponent implements OnInit {
 
-  adsByWord: AllAdModel[] = this.adService.adsByWord;
+  adsByWord: AllAdModel[];
   constructor(private adService: AdService, private route: ActivatedRoute) { 
     
   }
@@ -25,5 +25,7 @@ export class AdsByWordComponent implements OnInit {
     })
   }
 
-
+  onNotifyClicked(newAdList: any){
+    this.adsByWord = newAdList;
+  }
 }

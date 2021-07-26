@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchBarComponent } from './search-bar/search-bar.component';
+import { PriceFilterComponent } from './price-filter/price-filter.component';
 
 @NgModule({
   declarations: [
-    SearchBarComponent
+    SearchBarComponent,
+    PriceFilterComponent
   ],
   imports: [
     CommonModule,
@@ -14,8 +16,9 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  exports: [
-    SearchBarComponent
+   exports: [
+    SearchBarComponent,
+    PriceFilterComponent
   ]
 })
 export class FilterModule { }

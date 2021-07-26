@@ -1,27 +1,26 @@
-
-
+<app-price-filter (notify)="onNotifyClicked($event)"></app-price-filter>
 <div *ngIf = "adsByWord.length !== 0">
-        <h2 class="ads-name">Ads</h2>
-        <table class="table" *ngFor="let ad of adsByWord;" class="ad-article">
-          <div *ngFor="let image of ad.images; let i=index">
-            <div *ngIf="i < 1" class="ad-details">
-              <a routerLink="/ad/details/{{ad.id}}">
-              <img class = "image"   [src]= "image.url">
-            </a>
-            </div>
-          </div>
-          <td >
-            <span class="product-name">{{ ad.name }}</span>
-          </td>
-          <td >
-            <span class="product-address">{{ad.address.city}}, {{ad.address.region}} - {{ad.date | date }}</span>
-          </td>
-          <td>
-            <span class="product-price">{{ ad.price | number }}$</span>
-          </td>
-        </table>
+  <h2 class="ads-name">Ads</h2>
+  <table class="table" *ngFor="let ad of adsByWord;">
+    <div *ngFor="let image of ad.images; let i=index">
+      <div *ngIf="i < 1">
+        <a routerLink="/ad/details/{{ad.id}}">
+        <img class = "image"   [src]= "image.url">
+      </a>
+      </div>
+    </div>
+    <td >
+      <span class="product-name">{{ ad.name }}</span>
+    </td>
+    <td >
+      <span class="product-address">{{ad.address.city}}, {{ad.address.region}} - {{ad.date | date }}</span>
+    </td>
+    <td>
+      <span class="product-price" >{{ ad.price | number : '.2-2' }} $</span>
+    </td>
+  </table>
 </div>
 
 <div *ngIf = "adsByWord.length === 0">
- <img class ="product-not-found-img" src="https://res.cloudinary.com/nuxel-application/image/upload/v1626596989/page_not_found_jpg_zfufhx.jpg">
+<h3 class="not-found">Product not found!</h3>
 </div>

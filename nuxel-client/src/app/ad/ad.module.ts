@@ -10,6 +10,7 @@ import { AdsByUserComponent } from './ads-by-user/ads-by-user.component';
 import { UserModule } from '../user/user.module';
 import { EditAdComponent } from './edit-ad/edit-ad.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { FilterModule } from '../filter/filter.module';
 
 
 
@@ -21,7 +22,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     ReactiveFormsModule,
     UserModule,
-    NgbModule
+    NgbModule,
+    FilterModule
   ],
   providers: [
     AdService

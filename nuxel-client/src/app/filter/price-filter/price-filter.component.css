@@ -1,0 +1,29 @@
+.filter-class input{
+    float:left;
+    width: 80px
+  }
+
+.filter-class {
+    margin-left: 520px;
+    margin-top: 45px;
+    margin-bottom: 35px;
+}
+
+.filter-class span {
+    margin-top: 6px;
+    margin-right: 5px;
+}
+
+.filter-name {
+    position: absolute;
+    top: 70px;
+}
+
+.filter-span {
+    float:left;
+}
+
+.filter-button {
+    margin-top: 4px;
+    margin-left: 5px;
+}

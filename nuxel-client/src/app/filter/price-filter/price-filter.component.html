@@ -1,0 +1,13 @@
+<div class="filter-class">
+ <h6 class = "filter-name">Price</h6>
+    <span name="price-filters">
+        <input  maxlength="13" (keypress)="keyPress($event)" class="form-control" #minVal type="text" placeholder="from..." />
+        <span class="filter-span">$ - </span> 
+        <input  maxlength="13" (keypress)="keyPress($event)" class="form-control" #maxVal type="text" placeholder="to..." />
+        <span class="filter-span">$</span>
+        <input class="btn btn-primary btn-sm filter-button" (click) = 'onSubmit(minVal.value,maxVal.value)' type="submit" value="Filter" />
+     </span>
+</div>
+    
+
+    
