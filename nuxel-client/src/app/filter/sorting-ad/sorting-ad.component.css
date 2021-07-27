@@ -1,0 +1,9 @@
+.sorting-class{
+    position: absolute;
+    top: 70px;
+    right: 550px;
+}
+
+.selected {
+    border-radius: 3px;
+}

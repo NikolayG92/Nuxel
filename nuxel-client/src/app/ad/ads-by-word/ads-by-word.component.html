@@ -1,4 +1,5 @@
-<app-price-filter (notify)="onNotifyClicked($event)"></app-price-filter>
+<app-sorting-ad (sortingType) = "onSortingTypeClicked($event)"></app-sorting-ad>
+<app-price-filter (notify) = "onNotifyClicked($event)"></app-price-filter>
 <div *ngIf = "adsByWord.length !== 0">
   <h2 class="ads-name">Ads</h2>
   <table class="table" *ngFor="let ad of adsByWord;">

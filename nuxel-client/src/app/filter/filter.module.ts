@@ -4,11 +4,13 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { PriceFilterComponent } from './price-filter/price-filter.component';
+import { SortingAdComponent } from './sorting-ad/sorting-ad.component';
 
 @NgModule({
   declarations: [
     SearchBarComponent,
-    PriceFilterComponent
+    PriceFilterComponent,
+    SortingAdComponent
   ],
   imports: [
     CommonModule,
@@ -18,7 +20,8 @@ import { PriceFilterComponent } from './price-filter/price-filter.component';
   ],
    exports: [
     SearchBarComponent,
-    PriceFilterComponent
+    PriceFilterComponent,
+    SortingAdComponent
   ]
 })
 export class FilterModule { }

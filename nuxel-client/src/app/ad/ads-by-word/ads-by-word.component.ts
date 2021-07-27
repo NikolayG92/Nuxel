@@ -28,4 +28,14 @@ export class AdsByWordComponent implements OnInit {
   onNotifyClicked(newAdList: any){
     this.adsByWord = newAdList;
   }
+
+  onSortingTypeClicked(sortingType: string){
+    if(sortingType == "newest"){
+      this.adsByWord.sort((a, b) =>  new Date(a.date).getDate() - new Date(b.date).getDate())
+    }else if(sortingType == "cheapest"){
+      this.adsByWord.sort((a, b) =>  a.price - b.price)
+    }else{
+      this.adsByWord.sort((a, b) =>  b.price - a.price)
+    }
+  }
 }

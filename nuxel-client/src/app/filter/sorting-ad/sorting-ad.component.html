@@ -1,0 +1,7 @@
+<div class="sorting-class">
+    <h6>Sort by</h6>
+    <select class="selected" (change) ="sortingBy($event)" >
+        <option selected disabled hidden >choose here</option>
+        <option *ngFor="let item of data" [ngValue]="item" >{{item.name}}</option>
+    </select>
+</div>

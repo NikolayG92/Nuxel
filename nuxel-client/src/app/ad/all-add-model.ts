@@ -3,7 +3,7 @@ export interface AllAdModel{
     name: String,
     description: String,
     price: number,
-    date: String,
+    date: string,
     address: any
     postCode: number,
     phoneNumber: String,
