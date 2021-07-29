@@ -28,12 +28,13 @@ export class MessageService {
     return this.http.get<any>(`${this.apiUrl}/byUser/${id}`);
   }
   
-  getMessagesByCurrentConversation(id: String) : Observable<ConversationModel>{
-    return this.http.get<any>(`${this.apiUrl}/byConversation/${id}`);
+  getMessagesByCurrentConversation(id: String, senderId: String) : Observable<ConversationModel>{
+    return this.http.get<any>(`${this.apiUrl}/byConversation/${id}/${senderId}`);
   }
 
   createNewConversation(id: String, senderId: String) : Observable<ConversationModel>{
     return this.http.get<any>(`${this.apiUrl}/createNewConversation/${id}/${senderId}`);
   }
+
   
 }

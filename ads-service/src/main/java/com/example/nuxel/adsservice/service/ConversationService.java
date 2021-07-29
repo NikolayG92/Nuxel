@@ -11,5 +11,5 @@ public interface ConversationService {
 
     ConversationServiceModel createNewConversation(String id, String senderId);
 
-    ConversationServiceModel findById(String id);
+    ConversationServiceModel findById(String id, String senderId);
 }

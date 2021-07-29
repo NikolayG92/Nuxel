@@ -20,6 +20,8 @@
             <li *ngIf="isLoggedIn()">
                 <a routerLink="user/profile">
                     Profile
+
+                    <i id="envelope" *ngIf="unreadMessages === true" style="color: darkorange;" class="fas fa-envelope"></i>
                 </a>
             </li>
             <li *ngIf="isLoggedIn()">

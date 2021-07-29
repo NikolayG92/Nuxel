@@ -1,5 +1,6 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
+import { Component, DoCheck, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
+import { MessageService } from 'src/app/message/message.service';
 import { UserService } from 'src/app/user/user.service';
 import { JwtService } from '../auth/services/jwt.service';
 
@@ -8,28 +9,61 @@ import { JwtService } from '../auth/services/jwt.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnChanges{
 
   userId: string;
   username: string;
   hasCompletedAccountSetup: boolean;
+  unreadMessages = false;
+  currentUser: any | null;
 
   constructor(private userService: UserService,
-     private router: Router, 
-     private jwtHelper: JwtService) { 
-    
-     }
+    private router: Router,
+    private jwtHelper: JwtService,
+    private messageService: MessageService) {
 
-  ngOnInit(): void {
+    }
+  ngOnChanges(changes: SimpleChanges): void {
    
+    this.userService.getCurrentUserProfile()
+    .subscribe(data => {
+      this.currentUser = data;
+      this.hasUnreadMessages();
+    });
   }
 
+  ngOnInit(): void {
+    
+    this.userService.getCurrentUserProfile()
+    .subscribe(data => {
+      this.currentUser = data;
+      this.hasUnreadMessages();
+    });
+  
+  }
+    
   getUserDetails() {
     this.userId = this.jwtHelper.getUserId;
-    this.username = this.jwtHelper.getUsername;  
-    
- }
-    
+    this.username = this.jwtHelper.getUsername;
+
+  }
+
+  hasUnreadMessages() {
+    this.messageService.getConversationsByUserId(this.currentUser.id)
+    .subscribe(conversations => {
+      conversations.forEach(conversation => {
+        conversation.messages.forEach(message => {
+          if(message.unread && message.senderId != this.currentUser.id){
+            this.unreadMessages = true;
+            return;
+          }
+        })
+      })
+    })
+    this.unreadMessages = false;
+
+  }
+
 
   isLoggedIn() {
 
@@ -40,9 +74,9 @@ export class HeaderComponent {
   logout() {
     this.userService.logout();
     this.router.navigate(['/'])
-    .then(() => {
-      window.location.reload();
-    });
+      .then(() => {
+        window.location.reload();
+      });
   }
 
 }

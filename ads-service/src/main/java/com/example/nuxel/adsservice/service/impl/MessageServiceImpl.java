@@ -44,7 +44,7 @@ public class MessageServiceImpl implements MessageService {
         message.setTimeSent(LocalDateTime.now());
         message.setSenderId(messageBindingModel.getSenderId());
 
-        if(this.conversationRepository.findByBuyerId(messageBindingModel.getSenderId()) == null){
+        if(this.conversationRepository.findAllByBuyerId(messageBindingModel.getSenderId()) == null){
             if(messageBindingModel.getConversationId() == null){
                 Conversation conversation = new Conversation();
                 conversation.setAdId(messageBindingModel.getAdId());
@@ -69,7 +69,7 @@ public class MessageServiceImpl implements MessageService {
                 this.conversationRepository.saveAndFlush(conversation);
             }
 
-        }else if(this.conversationRepository.findByBuyerId(messageBindingModel.getSenderId()) != null
+        }else if(this.conversationRepository.findAllByBuyerId(messageBindingModel.getSenderId()) != null
                      && messageBindingModel.getConversationId() != null){
             Conversation conversation = this.conversationRepository
                     .findById(messageBindingModel.getConversationId())

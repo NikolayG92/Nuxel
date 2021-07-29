@@ -11,7 +11,7 @@ public interface ConversationRepository extends JpaRepository<Conversation, Stri
 
     List<Conversation> findAllByBuyerIdAndSellerId(String buyerId, String sellerId);
 
-    Conversation findByBuyerId(String id);
+    List<Conversation> findAllByBuyerId(String id);
 
     List<Conversation> findAllByAdId(String id);
 

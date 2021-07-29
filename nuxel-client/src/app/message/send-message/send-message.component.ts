@@ -23,7 +23,7 @@ export class SendMessageComponent implements OnInit {
   form: FormGroup;
   seller: UserModel;
   buyer: UserModel;
-  ad: AllAdModel;
+  ad: any;
   files = [];
   currentUser: any | null;
   messages: MessageModel[];

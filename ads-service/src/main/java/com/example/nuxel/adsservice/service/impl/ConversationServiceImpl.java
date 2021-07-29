@@ -4,10 +4,9 @@ import com.example.nuxel.adsservice.model.entities.Ad;
 import com.example.nuxel.adsservice.model.entities.Conversation;
 import com.example.nuxel.adsservice.repository.AdRepository;
 import com.example.nuxel.adsservice.repository.ConversationRepository;
+import com.example.nuxel.adsservice.repository.MessageRepository;
 import com.example.nuxel.adsservice.service.ConversationService;
 import com.example.nuxel.adsservice.service.serviceModels.ConversationServiceModel;
-import com.example.nuxel.adsservice.service.serviceModels.MessageServiceModel;
-import javassist.NotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -20,11 +19,13 @@ public class ConversationServiceImpl implements ConversationService {
 
     private final ConversationRepository conversationRepository;
     private final AdRepository adRepository;
+    private final MessageRepository messageRepository;
     private final ModelMapper modelMapper;
 
-    public ConversationServiceImpl(ConversationRepository conversationRepository, AdRepository adRepository, ModelMapper modelMapper) {
+    public ConversationServiceImpl(ConversationRepository conversationRepository, AdRepository adRepository, MessageRepository messageRepository, ModelMapper modelMapper) {
         this.conversationRepository = conversationRepository;
         this.adRepository = adRepository;
+        this.messageRepository = messageRepository;
         this.modelMapper = modelMapper;
     }
 
@@ -38,6 +39,11 @@ public class ConversationServiceImpl implements ConversationService {
                         .map(conversation, ConversationServiceModel.class));
             }
         });
+        conversationServiceModels.forEach(conversationServiceModel -> {
+            conversationServiceModel.getMessages()
+                    .sort((a, b) -> b.getTimeSent().compareTo(a.getTimeSent()));
+        });
+
         return conversationServiceModels.stream()
                 .sorted((a, b) ->
                         b.getMessages().get(0).getTimeSent().compareTo(a.getMessages().get(0).getTimeSent()))
@@ -60,11 +66,17 @@ public class ConversationServiceImpl implements ConversationService {
     }
 
     @Override
-    public ConversationServiceModel findById(String id) {
+    public ConversationServiceModel findById(String id, String senderId) {
         Conversation conversation = this.conversationRepository.findById(id)
                 .orElse(null);
         conversation.getMessages()
                 .sort((a, b) -> b.getTimeSent().compareTo(a.getTimeSent()));
+        if(!conversation.getMessages().get(0).getSenderId().equals(senderId)){
+            conversation.getMessages().forEach(message -> {
+                message.setUnread(false);
+                this.messageRepository.saveAndFlush(message);
+            });
+        }
         return this.modelMapper.map(conversation, ConversationServiceModel.class);
     }
 

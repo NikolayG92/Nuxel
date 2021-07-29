@@ -30,9 +30,9 @@
             <h6>Contact : </h6>
             <span>{{ad.address.phoneNumber}}</span>
             <button  class="message-button"  [routerLink]="['/messages/newConversation', ad.id, buyer.id]"
-             *ngIf="isLoggedIn() && conversation === null">Message</button>
+             *ngIf="isLoggedIn() && !conversation && currentUser.id !== ad.userId">Message</button>
              <button  class="message-button"  [routerLink]="['/messages/send-message', conversation.id]"
-             *ngIf="isLoggedIn() && conversation != null || currentUser.id !== ad.userId">Message</button>
+             *ngIf="isLoggedIn() && conversation && currentUser.id !== ad.userId">Message</button>
             <h5>Location : </h5>
             <span style="position: relative; left: 10px;">{{ad.address.city}}, {{ad.address.region}}</span>
         </article>

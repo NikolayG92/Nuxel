@@ -26,7 +26,6 @@ export class AdDetailsComponent implements OnInit {
   conversation: any | null;
 
   constructor(private adService: AdService,
-    private router: Router,
     private route: ActivatedRoute,
     private userService: UserService,
     private messageService: MessageService) { }
