@@ -27,7 +27,7 @@ export class HomeComponent{
     this.route.queryParams
     .subscribe(params => {
       if(params.createdAdd !== undefined && params.createdAdd === 'true') {
-          this.infoMessage = 'You created add succesfully!';
+          this.infoMessage = 'You created add successfully!';
       }else if(params.editAdd !== undefined && params.editAdd === 'true'){
           this.infoMessage = 'You edit add successfully!';
       }

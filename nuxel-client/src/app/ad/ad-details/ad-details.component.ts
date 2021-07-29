@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { MessageModule } from 'src/app/message/message.module';
+import { MessageService } from 'src/app/message/message.service';
 import { UserModel } from 'src/app/user/user-model';
 import { UserService } from 'src/app/user/user.service';
 import { AdService } from '../ad.service';
@@ -18,17 +20,18 @@ export class AdDetailsComponent implements OnInit {
   currentIndex = 0;
   seller: UserModel;
   buyer: UserModel;
-  ratingModel: RatingModel;
   infoMessage = '';  
-  isRated;
-  reviews: any;
+  currentUser: any | null;
+  conversation: any | null;
+
   constructor(private adService: AdService,
-    private router: Router,
     private route: ActivatedRoute,
-    private userService: UserService) {
-     }
+    private userService: UserService,
+    private messageService: MessageService) { }
 
   ngOnInit(): void {
+
+    this.currentUser = this.userService.currentUser;
 
     this.route.params.subscribe(params => {
 
@@ -42,40 +45,39 @@ export class AdDetailsComponent implements OnInit {
         this.userService.getUserById(data.userId)
         .subscribe(data => {
           this.seller = data;
-          this.reviews = this.seller.profileDetails.reviews;
-      this.reviews.forEach(review => {
-         if(review.buyerId == this.buyer.id){
-           this.isRated = true;
-         }
-      });
         })
       });
       
     })
-    this.buyer = this.userService.currentUser;
+    this.buyer = this.currentUser;
     this.route.queryParams
     .subscribe(params => {
       if(params.createMessage !== undefined && params.createMessage === 'true') {
-          this.infoMessage = 'You sent message succesfully!';
+          this.infoMessage = 'You sent message successfully!';
       }
     });
+    this.hasConversation();
   }
   
-  userRate(userRating: Number,sellerId: String,buyerId: String){
-    this.ratingModel = new RatingModel();
-    this.ratingModel.rating = userRating;
-    this.ratingModel.sellerId = sellerId;
-    this.ratingModel.buyerId = buyerId;
-    const formData = this.ratingModel;
-  
-    this.userService.rateSeller(formData)
-    .subscribe(() => {
-      window.location.reload();
-    });
-  }
 
   isLoggedIn() {
     return this.userService.isLoggedIn();
+  }
+
+  hasConversation(){
+    
+    this.messageService.getConversationsByUserId(this.currentUser.id)
+    .subscribe(data => {
+      data.forEach(conv => {
+        if(conv.adId === this.ad.id){
+     
+        if(conv.buyerId === this.currentUser.id){
+          this.conversation = conv;
+        }
+      }
+      })
+           
+    });
   }
 
   changePhoto(direction: string){

@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 @Service
@@ -130,10 +129,5 @@ public class AdServiceImpl implements AdService {
         this.adRepository.delete(ad);
     }
 
-    public void addMessageToAd(String adId, Message currentMassageId) {
-        Ad ad = this.adRepository.findById(adId).orElse(null);
-        ad.getMessages().add(currentMassageId);
-        this.adRepository.save(ad);
-    }
 }
 

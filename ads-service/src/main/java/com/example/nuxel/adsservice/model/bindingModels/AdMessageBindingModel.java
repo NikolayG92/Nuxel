@@ -11,8 +11,7 @@ import lombok.Setter;
 public class AdMessageBindingModel {
 
     private String description;
-    private String buyerId;
-    private String sellerId;
+    private String senderId;
     private String adId;
-
+    private String conversationId;
 }

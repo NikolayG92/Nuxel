@@ -1,0 +1,30 @@
+<div style="display: flex;">
+    <section class="profile-section">
+        <app-profile-management></app-profile-management>  
+    </section>
+    <div style="min-width: 600px;">
+        <h1 class="text-center text-dark">Your messages</h1>
+        <section class="message-list">
+          <div class="titles">
+            <span style="position:relative; left: 180px;">Name</span>
+            <span style="position:relative; left: 155px;">Sender</span>
+            <span style="position:relative; left: 125px;">Time Sent</span>
+          </div>
+          <article *ngFor="let conversation of conversationsByUser;" class="message-article">
+               <a style="color: black; text-decoration: none;" 
+               [routerLink]="['/messages/send-message', conversation.id]">
+                
+                <div class="message-info">
+                
+                  <span ><img class="ad-img" src="{{conversation.adImage.url}}"></span>
+                  <span class="ad-name">{{conversation.adName}}</span>
+                  <span class="ad-sender">{{conversation.senderName}}</span>
+                  
+                  <span class="ad-date">{{conversation.messages[0].timeSent | date: "dd-MM-yyyy HH:mm:ss" }}</span>              
+                </div>
+        
+              </a>
+          </article>
+        </section>
+      </div>
+</div>

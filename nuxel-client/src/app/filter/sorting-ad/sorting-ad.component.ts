@@ -12,7 +12,7 @@ export class SortingAdComponent implements OnInit {
   data:Array<Object> = [
     {id: 0, name: "newest"},
     {id: 1, name: "cheapest"},
-    {id: 2, name: "expensivest"}
+    {id: 2, name: "most expensive"}
   ];
 
   constructor() { }

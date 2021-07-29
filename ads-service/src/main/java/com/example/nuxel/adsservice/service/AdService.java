@@ -4,6 +4,7 @@ import com.example.nuxel.adsservice.model.bindingModels.AdAddBindingModel;
 import com.example.nuxel.adsservice.model.bindingModels.EditAdBindingModel;
 import com.example.nuxel.adsservice.model.entities.Ad;
 import com.example.nuxel.adsservice.service.serviceModels.AdServiceModel;
+import com.example.nuxel.adsservice.service.serviceModels.MessageServiceModel;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -24,4 +25,5 @@ public interface AdService {
     AdServiceModel editAd(EditAdBindingModel ad, MultipartFile[] files) throws IOException;
 
     void removeAd(String adId);
+
 }

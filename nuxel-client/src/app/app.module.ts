@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -13,16 +14,16 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { AdModule } from './ad/ad.module';
 
 import { AboutModule } from './about/about.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CategoryListComponent } from './category/category-list/category-list.component';
 import { CategoryComponent } from './category/category/category.component';
 import { CategoryModule } from './category/category.module';
 import { ProfileManagementComponent } from './user/profile-management/profile-management.component';
 import { MessageModule } from './message/message.module';
-import { BnNgIdleService } from 'bn-ng-idle';
-import { FilterModule } from './filter/filter.module';
 
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoaderService } from './services/loader.service';
+import { LoaderInterceptor } from './interceptors/loader-interceptor.service';
+import { LoaderComponent } from './shared/loader/loader.component';
 
 export function tokenGetter() {
   return localStorage.getItem('JWT_TOKEN');
@@ -34,6 +35,7 @@ export function tokenGetter() {
     HomeComponent,
     CategoryListComponent,
     CategoryComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +44,6 @@ export function tokenGetter() {
     UserModule,
     AdModule,
     AboutModule,
-    FilterModule,
     CategoryModule,
     MessageModule,
     HttpClientModule,
@@ -51,15 +52,22 @@ export function tokenGetter() {
         tokenGetter
       }
     }),
-    NgbModule,
+    BrowserAnimationsModule,
+    
     ],
   providers: [
-    BnNgIdleService,
+    LoaderService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
     },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptor,
+      multi: true
+    }
+
   ],
   bootstrap: [
     AppComponent,

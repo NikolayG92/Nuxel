@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 public class MessageServiceModel extends BaseServiceModel{
     private String description;
     private LocalDateTime timeSent;
-    private String buyerId;
-    private String sellerId;
-    private String adId;
+    private String conversationId;
+    private String senderId;
 }

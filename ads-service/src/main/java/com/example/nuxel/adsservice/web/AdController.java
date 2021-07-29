@@ -4,7 +4,9 @@ import com.example.nuxel.adsservice.model.bindingModels.AdAddBindingModel;
 import com.example.nuxel.adsservice.model.bindingModels.EditAdBindingModel;
 import com.example.nuxel.adsservice.model.entities.Ad;
 import com.example.nuxel.adsservice.service.AdService;
+import com.example.nuxel.adsservice.service.MessageService;
 import com.example.nuxel.adsservice.service.serviceModels.AdServiceModel;
+import com.example.nuxel.adsservice.service.serviceModels.MessageServiceModel;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,9 +22,11 @@ import java.util.List;
 public class AdController{
 
     private final AdService adService;
+    private final MessageService messageService;
 
-    public AdController(AdService adService) {
+    public AdController(AdService adService, MessageService messageService) {
         this.adService = adService;
+        this.messageService = messageService;
     }
 
     @PostMapping(value = "/add",
@@ -85,5 +89,4 @@ public class AdController{
                 .ok()
                 .body(adsByUser);
     }
-
 }
