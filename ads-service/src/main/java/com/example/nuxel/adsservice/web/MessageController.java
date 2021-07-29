@@ -36,9 +36,10 @@ public class MessageController {
         return ResponseEntity.ok(conversationService.findAllByCurrentUser(id));
     }
 
-    @GetMapping("/byConversation/{id}")
-    public ResponseEntity<ConversationServiceModel> getConversationById(@PathVariable("id") String id){
-        return ResponseEntity.ok(conversationService.findById(id));
+    @GetMapping("/byConversation/{id}/{senderId}")
+    public ResponseEntity<ConversationServiceModel> getConversationById(@PathVariable("id") String id,
+                                                                        @PathVariable("senderId") String senderId){
+        return ResponseEntity.ok(conversationService.findById(id,senderId));
     }
 
     @GetMapping("/createNewConversation/{id}/{senderId}")

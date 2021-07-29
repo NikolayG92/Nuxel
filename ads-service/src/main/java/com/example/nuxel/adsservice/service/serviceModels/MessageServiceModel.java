@@ -14,4 +14,5 @@ public class MessageServiceModel extends BaseServiceModel{
     private LocalDateTime timeSent;
     private String conversationId;
     private String senderId;
+    private boolean unread;
 }
