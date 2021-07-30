@@ -27,6 +27,26 @@
             <h5>Seller :</h5>
             <span>{{seller.profileDetails.firstName}} {{seller.profileDetails.lastName}}</span>
             <img class="ad-seller-image" src="{{seller.profileDetails.imageUrl}}">
+            <div *ngIf="ad.userId !== buyer.id">
+                <div *ngIf="!isRated">
+                    <ngb-rating [max]="5">
+                        <ng-template let-fill="fill" let-index="index + 1">
+                            <span class="star" (click)="userRate(index,seller.id,buyer.id)" [class.filled]="fill === 100"
+                                [class.bad]="index < 3">&#9733;</span>
+                        </ng-template>
+                    </ngb-rating>
+                </div>
+            </div>
+            <div *ngIf="isRated">
+                <ngb-rating class="star-rated" [readonly]="true" [(rate)]="seller.profileDetails.rating" max="5">  
+                </ngb-rating>
+            </div>
+            <div *ngIf="ad.userId === currentUser.id">
+                <ngb-rating class="star-rated" [readonly]="true" [(rate)]="seller.profileDetails.rating" max="5">  
+                </ngb-rating>
+            </div>
+            <h6>Rating : </h6>
+            <span>{{seller.profileDetails.rating.toFixed(1)}} ({{seller.profileDetails.reviews.length}})</span>
             <h6>Contact : </h6>
             <span>{{ad.address.phoneNumber}}</span>
             <button  class="message-button"  [routerLink]="['/messages/newConversation', ad.id, buyer.id]"
