@@ -49,7 +49,6 @@ export class AdDetailsComponent implements OnInit {
         .subscribe(data => {
           this.seller = data;
           this.reviews = this.seller.profileDetails.reviews;
-          
           this.reviews.forEach(review => {
              if(review.buyerId == this.buyer.id){
                this.isRated = true;

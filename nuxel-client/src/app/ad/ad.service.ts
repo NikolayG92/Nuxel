@@ -13,6 +13,7 @@ export class AdService {
 
   apiUrl = environment.adApiUrl + "/ads";
   adsByWord:  AllAdModel[];
+  adsByCategoryList: AllAdModel[];
 
   constructor(private userService: UserService,
     private http: HttpClient) {
@@ -24,7 +25,8 @@ export class AdService {
   }
 
   adsByCategory(id: string) {
-    return this.http.get<AllAdModel[]>(`${this.apiUrl}/allByCategory/${id}`)
+    return this.http.get<AllAdModel[]>(`${this.apiUrl}/allByCategory/${id}`).pipe
+    (tap(((data: AllAdModel[]) => this.adsByCategoryList = data)));
   }
 
   getAdById(id: string) {

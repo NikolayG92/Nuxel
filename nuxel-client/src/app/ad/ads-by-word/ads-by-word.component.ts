@@ -9,7 +9,6 @@ import { AllAdModel } from 'src/app/ad/all-add-model';
   styleUrls: ['./ads-by-word.component.css']
 })
 export class AdsByWordComponent implements OnInit {
-
   adsByWord: AllAdModel[];
   constructor(private adService: AdService, private route: ActivatedRoute) { 
     
@@ -25,8 +24,19 @@ export class AdsByWordComponent implements OnInit {
     })
   }
 
-  onNotifyClicked(newAdList: any){
-    this.adsByWord = newAdList;
+  onNotifyClicked(nums: number[]){
+    const minValue = Number(nums[0]);
+    const maxValue = Number(nums[1]);
+    
+    if(minValue == 0 && maxValue == 0){
+      this.adsByWord = this.adService.adsByWord;
+    }else if(minValue != 0 && maxValue !=  0){
+      this.adsByWord = this.adService.adsByWord.filter((ad) => ad.price >= minValue && ad.price <= maxValue);
+    }else if(minValue != 0){
+      this.adsByWord = this.adService.adsByWord.filter((ad) => ad.price >= minValue);
+    }else if(maxValue != 0){
+      this.adsByWord = this.adService.adsByWord.filter((ad) => ad.price <= maxValue);
+    }
   }
 
   onSortingTypeClicked(sortingType: string){
