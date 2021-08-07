@@ -26,7 +26,7 @@ export class PriceFilterComponent implements OnInit {
 
   onSubmit(minValue: Number,maxValue: Number){
     this.adsByWord = this.adService.adsByWord
-    .filter((ad) => ad.price >= minValue && ad.price <= maxValue);
+    .filter((ad) => ad.price >= minValue || ad.price <= maxValue);
     this.notify.emit(this.adsByWord);
   }
 
