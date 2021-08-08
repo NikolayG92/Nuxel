@@ -26,7 +26,7 @@ export class ConversationComponent implements OnInit {
     private userService: UserService,
     private adService: AdService) { 
       this.form = this.fb.group({
-      description: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(3000)]]
+      description: ['', [Validators.required, Validators.maxLength(3000)]]
     })}
 
   ngOnInit(): void {
@@ -63,14 +63,13 @@ export class ConversationComponent implements OnInit {
     window.location.reload;
   }
   
-  submitHandler(msgInput: String): void {
+  submitHandler(): void {
     const data = this.form.value;
 
     data.senderId = this.userService.currentUser.id;
 
     data.conversationId = this.conversation.id;
-    data.description = msgInput;
-
+    
     this.messageService.sendMessage(data).subscribe({
       next: () => {
          window.location.reload();

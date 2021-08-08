@@ -9,7 +9,7 @@ import { JwtService } from '../auth/services/jwt.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnChanges{
+export class HeaderComponent{
 
   userId: string;
   username: string;
@@ -23,14 +23,6 @@ export class HeaderComponent implements OnChanges{
     private messageService: MessageService) {
 
     }
-  ngOnChanges(changes: SimpleChanges): void {
-   
-    this.userService.getCurrentUserProfile()
-    .subscribe(data => {
-      this.currentUser = data;
-      this.hasUnreadMessages();
-    });
-  }
 
   ngOnInit(): void {
     
