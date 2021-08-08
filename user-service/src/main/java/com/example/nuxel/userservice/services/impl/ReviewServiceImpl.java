@@ -8,7 +8,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,11 +29,15 @@ public class ReviewServiceImpl implements ReviewService {
                 !reviewBindingModel.getBuyerId().equals(reviewBindingModel.getSellerId())) {
             review = this.reviewRepository.save(this.modelMapper.map(reviewBindingModel, Review.class));
         } else {
-            for (Review r : this.reviewRepository.findAllBySellerId(reviewBindingModel.getSellerId())) {
-                if (!r.getBuyerId().equals(reviewBindingModel.getBuyerId()) &&
-                        !r.getSellerId().equals(reviewBindingModel.getBuyerId()) &&
-                         this.reviewRepository.findByBuyerId(reviewBindingModel.getBuyerId()) == null) {
-                    review = this.reviewRepository.save(this.modelMapper.map(reviewBindingModel, Review.class));
+            if (this.reviewRepository.findAllBySellerId(reviewBindingModel.getSellerId()).size() == 0 &&
+                    !reviewBindingModel.getBuyerId().equals(reviewBindingModel.getSellerId())) {
+                review = this.reviewRepository.save(this.modelMapper.map(reviewBindingModel, Review.class));
+            } else {
+                for (Review r : this.reviewRepository.findAllBySellerId(reviewBindingModel.getSellerId())) {
+                    if (!r.getBuyerId().equals(reviewBindingModel.getBuyerId()) &&
+                            !r.getSellerId().equals(reviewBindingModel.getBuyerId())) {
+                        review = this.reviewRepository.save(this.modelMapper.map(reviewBindingModel, Review.class));
+                    }
                 }
             }
         }
@@ -42,7 +45,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public Double rating (String id) {
+    public Double rating(String id) {
         List<Integer> starsList = new ArrayList<>();
         reviewRepository.findAllBySellerId(id).forEach(r -> {
             starsList.add(r.getRating());
@@ -51,7 +54,11 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     private double ratingCounting(List<Integer> stars) {
-        int oneStar = 0;int twoStar = 0;int threeStar = 0;int fourStar = 0;int fiveStar = 0;
+        int oneStar = 0;
+        int twoStar = 0;
+        int threeStar = 0;
+        int fourStar = 0;
+        int fiveStar = 0;
         for (Integer star : stars) {
             if (star == 1) {
                 oneStar++;

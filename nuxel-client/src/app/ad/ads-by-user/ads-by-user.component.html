@@ -17,6 +17,7 @@
             </div>
             <div class="buttons">
               <a routerLink="/ad/edit/{{ad.id}}"><button class="edit-btn">Edit</button></a>
+              <button class="remove-btn" (click)="removeAd(ad.id)">Remove</button>
             </div>
           </div>
         </div>

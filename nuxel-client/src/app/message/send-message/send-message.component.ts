@@ -35,9 +35,9 @@ export class SendMessageComponent implements OnInit {
     private adService: AdService,
     private messageService: MessageService,
     private fb: FormBuilder) {
-    this.form = this.fb.group({
-      description: ['', [Validators.required, Validators.minLength(15), Validators.maxLength(3000)]]
-    })
+      this.form = this.fb.group({
+        description: ['', [Validators.required, Validators.maxLength(3000)]]
+      })
   }
 
   ngOnInit(): void {
@@ -68,14 +68,13 @@ export class SendMessageComponent implements OnInit {
 
   }
 
-  submitHandler(msgInput: String): void {
+  submitHandler(): void {
     const data = this.form.value;
 
     data.senderId = this.buyer.id;
     data.sellerId = this.seller.id;
     data.adId = this.ad.id;
-    data.description = msgInput;
-
+    
     this.messageService.sendMessage(data).subscribe({
       next: () => {
         this.router.navigate(['ad/details/',this.ad.id], {queryParams : { createMessage: true }});

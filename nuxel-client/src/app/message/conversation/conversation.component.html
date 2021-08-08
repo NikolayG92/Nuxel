@@ -1,10 +1,13 @@
 <div class="container">
     <h3 class=" text-center">Messaging</h3>
-    <div class="current-ad">
-        <img [src]="ad.images[0].url">
-        <span>{{ad.name}}</span>
-        <span>{{ad.price}}$</span>
-    </div>
+    <a routerLink='/ad/details/{{ad.id}}'>
+        <div class="current-ad">
+            <img [src]="ad.images[0].url">
+            <span>{{ad.name}}</span>
+            <span>{{ad.price}}$</span>
+        </div>
+    </a>
+  
     <div class="messaging">
         <div>
             <div class="msg_history">
@@ -32,11 +35,11 @@
                         </div>
                     </div>
                 </div>
-                <form id="msg">
+                <form id="msg" [formGroup]="form" (ngSubmit)="submitHandler()">
                     <div class="type_msg">
                         <div class="input_msg_write">
-                            <input id='msgInput' class="write_msg" #msgInput placeholder="Type a message">
-                            <button (click)='submitHandler(msgInput.value)' class="msg_send_btn" type="button">
+                            <input id='description' class="write_msg" formControlName="description" placeholder="Type a message">
+                            <button [disabled]="form.invalid" class="msg_send_btn" type="submit">
                                 <i class="fas fa-paper-plane"></i>>
                             </button>
                         </div>

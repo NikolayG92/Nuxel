@@ -23,6 +23,9 @@ export class AdDetailsComponent implements OnInit {
   infoMessage = '';  
   currentUser: any | null;
   conversation: any | null;
+  ratingModel: RatingModel;
+  isRated;
+  reviews: any;
 
   constructor(private adService: AdService,
     private route: ActivatedRoute,
@@ -30,6 +33,7 @@ export class AdDetailsComponent implements OnInit {
     private messageService: MessageService) { }
 
   ngOnInit(): void {
+    
 
     this.currentUser = this.userService.currentUser;
 
@@ -41,10 +45,15 @@ export class AdDetailsComponent implements OnInit {
       .subscribe(data => {
         this.ad = data;
         this.currentImage = data.images[this.currentIndex];
-        
         this.userService.getUserById(data.userId)
         .subscribe(data => {
           this.seller = data;
+          this.reviews = this.seller.profileDetails.reviews;
+          this.reviews.forEach(review => {
+             if(review.buyerId == this.buyer.id){
+               this.isRated = true;
+             }
+          });
         })
       });
       
@@ -59,6 +68,18 @@ export class AdDetailsComponent implements OnInit {
     this.hasConversation();
   }
   
+  userRate(userRating: Number,sellerId: String,buyerId: String){
+    this.ratingModel = new RatingModel();
+    this.ratingModel.rating = userRating;
+    this.ratingModel.sellerId = sellerId;
+    this.ratingModel.buyerId = buyerId;
+    const formData = this.ratingModel;
+  
+    this.userService.rateSeller(formData)
+    .subscribe(() => {
+      window.location.reload();
+    });
+  }
 
   isLoggedIn() {
     return this.userService.isLoggedIn();

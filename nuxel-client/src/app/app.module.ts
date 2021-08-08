@@ -24,6 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoaderService } from './services/loader.service';
 import { LoaderInterceptor } from './interceptors/loader-interceptor.service';
 import { LoaderComponent } from './shared/loader/loader.component';
+import { FilterModule } from './filter/filter.module';
 
 export function tokenGetter() {
   return localStorage.getItem('JWT_TOKEN');
@@ -47,6 +48,7 @@ export function tokenGetter() {
     CategoryModule,
     MessageModule,
     HttpClientModule,
+    FilterModule,
     JwtModule.forRoot({
       config: {
         tokenGetter

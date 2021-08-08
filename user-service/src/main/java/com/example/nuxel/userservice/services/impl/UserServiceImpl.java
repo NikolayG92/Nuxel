@@ -192,10 +192,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public Double rateUser(ReviewBindingModel ratingBindingModel) {
+    public Double  rateUser(ReviewBindingModel ratingBindingModel) {
         User user = userRepository.findById(ratingBindingModel.getSellerId()).orElse(null);
         Review review = reviewService.addReview(ratingBindingModel);
         Double rating = 0.0;
+
         if(review != null){
             user.getProfileDetails().getReviews().add(review);
             rating = reviewService.rating(ratingBindingModel.getSellerId());
