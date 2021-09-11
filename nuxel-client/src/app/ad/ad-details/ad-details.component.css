@@ -59,6 +59,8 @@ img {
 }
 
 .previous-photo {
+    height: 300px;
+    margin-left: -25px;
     left: 25px;
     position: relative;
     border: none;

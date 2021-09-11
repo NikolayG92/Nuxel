@@ -10,6 +10,9 @@ import { AllAdModel } from 'src/app/ad/all-add-model';
 })
 export class AdsByWordComponent implements OnInit {
   adsByWord: AllAdModel[];
+  totalLenght:any;
+  page:Number=1;
+
   constructor(private adService: AdService, private route: ActivatedRoute) { 
     
   }
@@ -19,6 +22,7 @@ export class AdsByWordComponent implements OnInit {
       const word = params['word'];
       this.adService.allByWord(word)
       .subscribe(data => {
+        this.totalLenght = data.length;
         this.adsByWord = data
       });
     })

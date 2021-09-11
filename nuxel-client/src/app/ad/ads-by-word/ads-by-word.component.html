@@ -1,8 +1,8 @@
 <app-sorting-ad (sortingType) = "onSortingTypeClicked($event)"></app-sorting-ad>
 <app-price-filter (notify) = "onNotifyClicked($event)"></app-price-filter>
-<div *ngIf = "adsByWord.length !== 0">
+<div *ngIf = "totalLenght !== 0">
   <h2 class="ads-name">Ads</h2>
-  <table class="table" *ngFor="let ad of adsByWord;">
+  <table class="table" *ngFor="let ad of adsByWord | paginate: {itemsPerPage: 1, currentPage: page}">
     <div *ngFor="let image of ad.images; let i=index">
       <div *ngIf="i < 1">
         <a routerLink="/ad/details/{{ad.id}}">
@@ -20,6 +20,7 @@
       <span class="product-price" >{{ ad.price | number : '.2-2' }} $</span>
     </td>
   </table>
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
 </div>
 <br/>
 
