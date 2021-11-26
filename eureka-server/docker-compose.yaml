@@ -1,0 +1,68 @@
+version: '3'
+
+services:
+
+  nuxel_db:
+    image: mysql:8.0
+    container_name: nuxel_db
+    environment:
+      - MYSQL_ROOT_USER=root
+      - MYSQL_ROOT_PASSWORD=12345
+      - MYSQL_HOST=nuxel_db
+      - MYSQL_DATABASE=nuxel_db
+    ports:
+      - 3306:3306
+
+  eureka-server:
+    container_name: eureka-server
+    build:
+      context: ./docker
+    restart: on-failure
+    ports:
+      - 8761:8761
+
+
+  cloud-api:
+    build:
+      context: E:\Projects\Nuxel\cloud-api\docker
+    restart: on-failure
+    ports:
+      - 9093:9093
+
+  user-service:
+    container_name: user-service
+    build:
+      context: E:\Projects\Nuxel\user-service\docker
+    restart: on-failure
+    depends_on:
+      - nuxel_db
+    ports:
+      - 9091:9091
+    environment:
+      - DATABASE_HOST=nuxel_db
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=12345
+      - DATABASE_NAME=nuxel_db
+      - DATABASE_PORT=3306
+
+  ads-service:
+    container_name: ads-service
+    build:
+      context: E:\Projects\Nuxel\ads-service\
+    restart: on-failure
+    depends_on:
+      - nuxel_db
+    ports:
+      - 9092:9092
+    environment:
+      - DATABASE_HOST=nuxel_db
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=12345
+      - DATABASE_NAME=nuxel_db
+      - DATABASE_PORT=3306
+
+  frontend:
+    container_name: frontend
+    build: E:\Projects\Nuxel\nuxel-client
+    ports:
+      - 4200:80
