@@ -6,7 +6,6 @@ import com.example.nuxel.adsservice.model.entities.Ad;
 import com.example.nuxel.adsservice.model.entities.Address;
 import com.example.nuxel.adsservice.model.entities.Category;
 import com.example.nuxel.adsservice.model.entities.Image;
-import com.example.nuxel.adsservice.model.entities.*;
 import com.example.nuxel.adsservice.repository.AdRepository;
 import com.example.nuxel.adsservice.service.AdService;
 import com.example.nuxel.adsservice.service.AddressService;
@@ -14,6 +13,10 @@ import com.example.nuxel.adsservice.service.CategoryService;
 import com.example.nuxel.adsservice.service.CloudinaryService;
 import com.example.nuxel.adsservice.service.serviceModels.AdServiceModel;
 import com.example.nuxel.adsservice.service.serviceModels.AddressServiceModel;
+import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -28,6 +31,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 
+@Slf4j
 @Service
 @Transactional
 public class AdServiceImpl implements AdService {
@@ -67,7 +71,13 @@ public class AdServiceImpl implements AdService {
                 .findByName(adAddBindingModel.getCategory()), Category.class);
         ad.setImages(images);
         ad.setCategory(category);
-        this.adRepository.save(ad);
+        try{
+            this.adRepository.save(ad);
+            log.info(String.format("Ad %s has being added", adAddBindingModel.getName()));
+        }catch (Exception e){
+            log.error("Ad %s could not be added", adAddBindingModel.getName());
+        }
+
         return ad;
     }
 

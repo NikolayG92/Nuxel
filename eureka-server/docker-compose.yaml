@@ -61,8 +61,3 @@ services:
       - DATABASE_NAME=nuxel_db
       - DATABASE_PORT=3306
 
-  frontend:
-    container_name: frontend
-    build: E:\Projects\Nuxel\nuxel-client
-    ports:
-      - 4200:80
