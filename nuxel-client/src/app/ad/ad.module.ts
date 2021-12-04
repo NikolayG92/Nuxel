@@ -9,7 +9,7 @@ import { AdDetailsComponent } from './ad-details/ad-details.component';
 import { AdsByUserComponent } from './ads-by-user/ads-by-user.component';
 import { UserModule } from '../user/user.module';
 import { EditAdComponent } from './edit-ad/edit-ad.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FilterModule } from '../filter/filter.module';
 import { NgxPaginationModule } from 'ngx-pagination';
 
