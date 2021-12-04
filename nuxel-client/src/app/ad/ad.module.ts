@@ -11,6 +11,8 @@ import { UserModule } from '../user/user.module';
 import { EditAdComponent } from './edit-ad/edit-ad.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FilterModule } from '../filter/filter.module';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 
 
@@ -23,7 +25,8 @@ import { FilterModule } from '../filter/filter.module';
     ReactiveFormsModule,
     UserModule,
     NgbModule,
-    FilterModule
+    FilterModule,
+    NgxPaginationModule
   ],
   providers: [
     AdService

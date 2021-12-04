@@ -25,6 +25,8 @@ import { LoaderService } from './services/loader.service';
 import { LoaderInterceptor } from './interceptors/loader-interceptor.service';
 import { LoaderComponent } from './shared/loader/loader.component';
 import { FilterModule } from './filter/filter.module';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 export function tokenGetter() {
   return localStorage.getItem('JWT_TOKEN');
@@ -49,6 +51,7 @@ export function tokenGetter() {
     MessageModule,
     HttpClientModule,
     FilterModule,
+    NgxPaginationModule,
     JwtModule.forRoot({
       config: {
         tokenGetter

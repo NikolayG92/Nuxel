@@ -1,11 +1,16 @@
 <app-price-filter (notify)="onNotifyClicked($event)"></app-price-filter>
 <div class="sort-form">
   <app-sorting-ad (sortingType)="onSortingTypeClicked($event)"></app-sorting-ad>
+  <app-items-per-page (itemsPerPage)="showItemsPerPage($event)"></app-items-per-page>
 </div>
 
+
 <div *ngIf="adsByCategory.length !== 0">
+
   <h2 class="ads-name">{{category.name}}</h2>
-  <table class="table" *ngFor="let ad of adsByCategory;">
+  <table class="table" *ngFor="let ad of adsByCategory | paginate: {id: 'listOfAds',
+                                                                    itemsPerPage: itemsPerPage,
+                                                                    currentPage: page}">
     <div *ngFor="let image of ad.images; let i=index">
       <div *ngIf="i < 1">
         <a routerLink="/ad/details/{{ad.id}}">
@@ -21,10 +26,15 @@
     </td>
     <td>
       <span class="product-price">{{ ad.price | number : '.2-2' }} $</span>
-    </td>
+    </td> 
   </table>
+  <div style="margin-bottom: 50px;">
+    <pagination-controls id="listOfAds" (pageChange)="page = $event"></pagination-controls>
+  </div>
+  
 </div>
 <br />
+
 
 <div *ngIf="adsByCategory.length === 0">
   <h3 class="not-found">Product not found!</h3>
