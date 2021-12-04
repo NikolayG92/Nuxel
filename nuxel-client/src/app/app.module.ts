@@ -51,6 +51,7 @@ export function tokenGetter() {
     MessageModule,
     HttpClientModule,
     FilterModule,
+    NgxPaginationModule,
     JwtModule.forRoot({
       config: {
         tokenGetter

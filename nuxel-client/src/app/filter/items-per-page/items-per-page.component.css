@@ -1,0 +1,9 @@
+.items-menu{
+    position: absolute;
+    top: 70px;
+    right: 420px;
+}
+
+.selected {
+    border-radius: 3px;
+}

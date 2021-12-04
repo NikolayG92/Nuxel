@@ -5,12 +5,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { PriceFilterComponent } from './price-filter/price-filter.component';
 import { SortingAdComponent } from './sorting-ad/sorting-ad.component';
+import { ItemsPerPageComponent } from './items-per-page/items-per-page.component';
 
 @NgModule({
   declarations: [
     SearchBarComponent,
     PriceFilterComponent,
-    SortingAdComponent
+    SortingAdComponent,
+    ItemsPerPageComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import { SortingAdComponent } from './sorting-ad/sorting-ad.component';
    exports: [
     SearchBarComponent,
     PriceFilterComponent,
-    SortingAdComponent
+    SortingAdComponent,
+    ItemsPerPageComponent
   ]
 })
 export class FilterModule { }

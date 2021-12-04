@@ -1,0 +1,6 @@
+<div class="items-menu">
+    <h6>Items per page</h6>
+    <select class="selected" (change) ="showItemsPerPage($event)" >
+        <option *ngFor="let item of data" [ngValue]="item" >{{item.value}}</option>
+    </select>
+</div>

@@ -2,11 +2,19 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+// Environment variables for local run
 export const environment = {
   production: false,
   usersApiUrl: "http://localhost:9091/api",
   adApiUrl: "http://localhost:9092/api"
 };
+
+// Environment variables for running in docker container
+// export const environment = {
+//   production: false,
+//   usersApiUrl: "http://user-service:9091/api",
+//   adApiUrl: "http://ads-service:9092/api"
+// };
 
 /*
  * For easier debugging in development mode, you can import the following file

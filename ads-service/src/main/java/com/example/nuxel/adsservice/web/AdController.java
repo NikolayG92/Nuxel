@@ -6,7 +6,6 @@ import com.example.nuxel.adsservice.model.entities.Ad;
 import com.example.nuxel.adsservice.service.AdService;
 import com.example.nuxel.adsservice.service.MessageService;
 import com.example.nuxel.adsservice.service.serviceModels.AdServiceModel;
-import com.example.nuxel.adsservice.service.serviceModels.MessageServiceModel;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

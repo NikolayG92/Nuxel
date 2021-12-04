@@ -18,6 +18,8 @@ export class AdsByCategoryComponent implements OnInit {
   category: CategoryModel;
   currentUser: any | null;
   isLoading: false;
+  page: number = 1;
+  itemsPerPage: number = 5;
  
   constructor(private adService: AdService,
     private route: ActivatedRoute,
@@ -70,4 +72,10 @@ export class AdsByCategoryComponent implements OnInit {
       this.adsByCategory = this.adService.adsByCategoryList.filter((ad) => ad.price <= maxValue);
     }
   }
+
+  showItemsPerPage(value: number) {
+     this.itemsPerPage = value;
+     
+  }
+
 }
